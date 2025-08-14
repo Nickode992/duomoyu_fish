@@ -30,6 +30,17 @@
 - ONNX 模型文件改走 R2，规避 25MiB 资产限制
 - 成功部署：`https://duomoyu.oaeen-xxc.workers.dev`
 
+#### 品牌与内容清理（本次新增）
+- 站点品牌统一为 `duomoyu.life`：
+  - 将页面内 `drawafish.com` 全量替换为 `duomoyu.life`（`index.html`、`tank.html`、`rank.html`、`profile.html`、`fishtanks.html`，含 `public/` 镜像）。
+  - 更新 Open Graph/Twitter 标签与 `link rel=canonical` 指向 `https://duomoyu.life`。
+  - 更新 `sitemap.xml`、`robots.txt`、`CNAME`（根目录与 `public/`）到 `duomoyu.life`。
+- 移除 Google Analytics（gtag）：清理 `index/tank/rank/profile/fishtanks/login/fishtank-view/moderation/swipe-moderation` 及其 `public/` 镜像中的 GA 代码。
+- 增加原作者 credit：
+  - 统一页脚由 `src/js/footer-utils.js` 注入，文案为：`© duomoyu.life | Credit: built upon DrawAFish by fifteen.games`，并链接到原仓库与作者站点。
+  - 首页此前未加载页脚，已在 `index.html` 与 `public/index.html` 引入 `src/js/footer-utils.js` 以展示 credit。
+- 链接修正：移除不准确的仓库链接（`https://github.com/nickode992/fishes`）。
+
 ### 路由一览（当前）
 - 静态：`/*`（Assets）
 - 模型：`GET /fish_doodle_classifier.onnx` → R2 代理
@@ -85,5 +96,9 @@ npx wrangler deploy
 - 账号体系：实现 `/auth/*`（Cloudflare Access/JWT 或 Auth.js + D1）
 - 图片访问策略：签名 URL 或公共策略
 - 自定义域名/路由：在 `wrangler.toml` 增加 `routes` 并配置 DNS
+
+> 待办建议：
+> - 如需在首页顶部显著展示 credit，可在 `index.html` 增加固定提示条（当前为页脚显示）。
+> - README 仍含原项目描述/链接，可按需改写为新项目介绍，并在文末保留致谢链接。
 
 
