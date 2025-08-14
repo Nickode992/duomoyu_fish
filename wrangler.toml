@@ -1,0 +1,30 @@
+name = "duomoyu"
+main = "worker/src/index.js"
+compatibility_date = "2025-08-14"
+
+[assets]
+directory = "./public"
+binding = "ASSETS"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "duomoyu-db"
+database_id = "aac6e1c5-1f4a-4424-a5e3-4e1d8d22cf1f"
+# database_id will be filled by `npx wrangler d1 create fishes-db`
+# database_id = "<YOUR_D1_DATABASE_ID>"
+
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "duomoyu-images"
+# preview_bucket_name can be set for preview env if desired
+# preview_bucket_name = "fishes-images-preview"
+
+[vars]
+JWT_SECRET = "change-me-in-prod"
+
+routes = [
+  { pattern = "duomoyu.life", custom_domain = true },
+  { pattern = "www.duomoyu.life", custom_domain = true }
+]
+
+
