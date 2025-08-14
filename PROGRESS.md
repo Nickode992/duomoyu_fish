@@ -29,6 +29,13 @@
 - 前端适配：`src/js/fish-utils.js` `BACKEND_URL` 同域/本地自动切换
 - ONNX 模型文件改走 R2，规避 25MiB 资产限制
 - 成功部署：`https://duomoyu.oaeen-xxc.workers.dev`
+- 登录与账号（本次新增）：
+  - 移除 Google One Tap（`login.html`、`public/login.html`、`src/js/login.js` 等清理）。
+  - 新增 D1 迁移 `migrations/0002_auth.sql`：创建 `users` 与 `password_resets` 表。
+  - 后端新增 `/auth/register`、`/auth/login`、`/auth/forgot-password`、`/auth/reset-password`：
+    - 注册/登录：PBKDF2（SHA-256, 100k）存储密码，签发 7 天 JWT；支持将本地匿名 `userId` 的鱼合并到账号。
+    - 忘记/重置：生成 30 分钟有效的重置 token，写入 `password_resets` 并通过 Resend 发送邮件；校验 token 后更新密码。
+  - 邮件发送：接入 Resend（`RESEND_API_KEY`、`RESEND_FROM`）。
 
 #### 品牌与内容清理（本次新增）
 - 站点品牌统一为 `duomoyu.life`：
@@ -49,11 +56,13 @@
 - 投票：`POST /api/vote`
 - 举报：`POST /api/report`
 - 上传：`POST /uploadfish`
+- 认证：`POST /auth/register`、`POST /auth/login`、`POST /auth/forgot-password`、`POST /auth/reset-password`
 
 ### 关键文件
 - `wrangler.toml`
 - `worker/src/index.js`
 - `migrations/0001_init.sql`
+- `migrations/0002_auth.sql`
 - `public/`（静态站点目录）
 
 ### 环境与版本
@@ -63,6 +72,7 @@
   - R2：`BUCKET = duomoyu-images`
   - Assets：`ASSETS`（目录 `public/`）
   - Env：`JWT_SECRET`
+  - 邮件：`RESEND_API_KEY`（secret）、`RESEND_FROM`（如 `no-reply@duomoyu.life`）
 
 ### 自定义域名（duomoyu.life）
 - Wrangler 配置：
@@ -79,8 +89,10 @@
 npx wrangler login
 npx wrangler d1 create duomoyu-db
 npx wrangler d1 execute duomoyu-db --file=./migrations/0001_init.sql
+npx wrangler d1 execute duomoyu-db --file=./migrations/0002_auth.sql
 npx wrangler r2 bucket create duomoyu-images
 npx wrangler r2 object put duomoyu-images/models/fish_doodle_classifier.onnx --file=./fish_doodle_classifier.onnx --remote
+npx wrangler secret put RESEND_API_KEY --name duomoyu
 npx wrangler dev
 npx wrangler deploy
 ```
@@ -93,7 +105,7 @@ npx wrangler deploy
 ### 下一步
 - 鱼缸与资料模块：实现 `/api/fishtanks/*`、`/api/profile/*`
 - 审核后台：实现 `/api/moderate/*` 并加管理鉴权
-- 账号体系：实现 `/auth/*`（Cloudflare Access/JWT 或 Auth.js + D1）
+- 账号完善：邮件模板美化、邮件发送可切换 Email Workers、刷新/登出接口
 - 图片访问策略：签名 URL 或公共策略
 - 自定义域名/路由：在 `wrangler.toml` 增加 `routes` 并配置 DNS
 

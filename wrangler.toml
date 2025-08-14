@@ -21,6 +21,8 @@ bucket_name = "duomoyu-images"
 
 [vars]
 JWT_SECRET = "change-me-in-prod"
+RESEND_API_KEY = ""
+RESEND_FROM = "no-reply@duomoyu.life"
 
 routes = [
   { pattern = "duomoyu.life", custom_domain = true },

@@ -8,17 +8,7 @@
     document.getElementById('signup-form').addEventListener('submit', handleSignUp);
     document.getElementById('forgot-password-form').addEventListener('submit', handleForgotPassword);
     
-    // Initialize Google Sign-In
-    google.accounts.id.initialize({
-      client_id: "571679687712-bhet9jnrul5gm1ijhjk6am28dfrtd88h.apps.googleusercontent.com",
-      callback: handleGoogleCredentialResponse
-    });
-    
-    // Render Google Sign-In button
-    google.accounts.id.renderButton(
-      document.getElementById("g_id_signin"),
-      { theme: "outline", size: "large" }
-    );
+    // Google One Tap removed
 
     // Check for success messages from redirects
     checkForSuccessMessage();
@@ -61,8 +51,8 @@
     document.getElementById('signup-form').style.display = 'none';
     document.getElementById('forgot-password-form').style.display = 'none';
     document.querySelectorAll('.auth-tab-btn').forEach(btn => btn.style.display = 'none');
-    document.getElementById('g_id_signin').style.display = 'none';
-    document.querySelector('.divider').style.display = 'none';
+    const divider = document.querySelector('.divider');
+    if (divider) divider.style.display = 'none';
     
     // Show the already logged in section
     const alreadyLoggedIn = document.getElementById('already-logged-in');
@@ -167,18 +157,7 @@
     }
   }
 
-  // Google OAuth handler
-  async function handleGoogleCredentialResponse(response) {
-    const userId = localStorage.getItem('userId') || null; // Optional userId for existing users
-    
-    const requestPromise = fetch(BACKEND_URL + "/auth/google", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ token: response.credential, userId })
-    });
-    
-    await executeAuthRequest(requestPromise, "Google authentication", "Authentication failed.");
-  }
+  // Google One Tap removed: email/password and reset flows only
 
   // Handle email/password sign in
   async function handleSignIn(event) {
