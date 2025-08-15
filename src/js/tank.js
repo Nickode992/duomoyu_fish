@@ -1088,27 +1088,27 @@ function showFishInfoModal(fish) {
     // Add highlighting if this is the user's fish
     const isCurrentUserFish = isUserFish(fish);
     if (isCurrentUserFish) {
-        info += `<div style='margin-bottom: 10px; padding: 8px; background: linear-gradient(135deg, #fff9e6, #fff3d0); border: 2px solid #ffd700; border-radius: 6px; color: #333; font-weight: bold; font-size: 12px; box-shadow: 0 2px 6px rgba(255,215,0,0.3);'>Your Fish</div>`;
+        info += `<div style='margin-bottom: 10px; padding: 8px; background: linear-gradient(135deg, #fff9e6, #fff3d0); border: 2px solid #ffd700; border-radius: 6px; color: #333; font-weight: bold; font-size: 12px; box-shadow: 0 2px 6px rgba(255,215,0,0.3);'>${(window.i18n && i18n.t)? i18n.t('tank.modal.yourFish') : 'Your Fish'}</div>`;
     }
 
-    info += `<img src='${imgDataUrl}' width='${modalWidth}' height='${modalHeight}' style='display:block;margin:0 auto 10px auto;border:1px solid #808080;background:#ffffff;' alt='Fish'><br>`;
+    info += `<img src='${imgDataUrl}' width='${modalWidth}' height='${modalHeight}' style='display:block;margin:0 auto 10px auto;border:1px solid #808080;background:#ffffff;' alt='${(window.i18n && i18n.t)? i18n.t('tank.modal.altFish') : 'Fish'}'><br>`;
     info += `<div style='margin-bottom:10px;'>`;
 
     // Make artist name a clickable link to their profile if userId exists
-    const artistName = fish.artist || 'Anonymous';
+    const artistName = fish.artist || ((window.i18n && i18n.t)? i18n.t('common.anonymous') : 'Anonymous');
     const userId = fish.userId;
 
     if (userId) {
-        info += `<strong>Artist:</strong> <a href="profile.html?userId=${encodeURIComponent(userId)}" target="_blank" style="color: #0000EE; text-decoration: underline;">${escapeHtml(artistName)}</a><br>`;
+        info += `<strong>${(window.i18n && i18n.t)? i18n.t('tank.modal.artist') : 'Artist:'}</strong> <a href="profile.html?userId=${encodeURIComponent(userId)}" target="_blank" style="color: #0000EE; text-decoration: underline;">${escapeHtml(artistName)}</a><br>`;
     } else {
-        info += `<strong>Artist:</strong> ${escapeHtml(artistName)}<br>`;
+        info += `<strong>${(window.i18n && i18n.t)? i18n.t('tank.modal.artist') : 'Artist:'}</strong> ${escapeHtml(artistName)}<br>`;
     }
 
     if (fish.createdAt) {
-        info += `<strong>Created:</strong> ${formatDate(fish.createdAt)}<br>`;
+        info += `<strong>${(window.i18n && i18n.t)? i18n.t('tank.modal.created') : 'Created:'}</strong> ${formatDate(fish.createdAt)}<br>`;
     }
     const score = calculateScore(fish);
-    info += `<strong class="modal-score">Score: ${score}</strong>`;
+    info += `<strong class="modal-score">${(window.i18n && i18n.t)? i18n.t('tank.modal.score') : 'Score'}: ${score}</strong>`;
     info += `</div>`;
 
     // Add voting controls using shared utility
@@ -1118,7 +1118,7 @@ function showFishInfoModal(fish) {
     const userToken = localStorage.getItem('userToken');
     if (userToken) {
         info += `<div style='margin-top: 10px; text-align: center;'>`;
-        info += `<button onclick="showAddToTankModal('${fish.docId}')" style="border: 1px solid #000; padding: 4px 8px; cursor: pointer;">Add to Tank</button>`;
+        info += `<button onclick="showAddToTankModal('${fish.docId}')" style="border: 1px solid #000; padding: 4px 8px; cursor: pointer;">${(window.i18n && i18n.t)? i18n.t('tank.modal.btn.addToTank') : 'Add to Tank'}</button>`;
         info += `</div>`;
     }
 

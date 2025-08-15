@@ -85,7 +85,15 @@
     "myTanks": "my tanks",
     "fishCount": "Fish count:",
     "feed": { "title": "Feed the fish:", "desktop": "Hold Shift + Click or Right-click", "mobile": "Double-tap or Long-press", "tail": "to drop food pellets" },
-    "loading": "loading..."
+    "loading": "loading...",
+    "modal": {
+      "yourFish": "Your Fish",
+      "artist": "Artist:",
+      "created": "Created:",
+      "score": "Score",
+      "altFish": "Fish",
+      "btn": { "addToTank": "Add to Tank" }
+    }
   },
   "fishtankView": {
     "loading": "Loading tank...",
@@ -118,6 +126,10 @@
     "empty": { "title": "No user logged in", "desc": "Please log in to view your profile", "login": "Log In", "signup": "Sign Up" },
     "stats": { "created": "Fish Created", "totalScore": "Total Score", "upvotes": "Total Upvotes", "downvotes": "Total Downvotes" },
     "actions": { "edit": "Edit Profile", "viewFish": "View All Fish", "visitTank": "Visit Tank", "share": "Share Profile" }
+  }
+  ,
+  "common": {
+    "anonymous": "Anonymous"
   }
 }
 

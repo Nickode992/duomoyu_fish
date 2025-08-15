@@ -85,7 +85,15 @@
     "myTanks": "我的鱼缸",
     "fishCount": "鱼数量：",
     "feed": { "title": "喂鱼：", "desktop": "按住 Shift + 点击 或 右键", "mobile": "双击或长按", "tail": "投放鱼粮" },
-    "loading": "加载中..."
+    "loading": "加载中...",
+    "modal": {
+      "yourFish": "你的鱼",
+      "artist": "作者：",
+      "created": "创建：",
+      "score": "分数",
+      "altFish": "鱼",
+      "btn": { "addToTank": "加入我的鱼缸" }
+    }
   },
   "fishtankView": {
     "loading": "鱼缸加载中...",
@@ -118,6 +126,10 @@
     "empty": { "title": "未登录", "desc": "请登录后查看你的资料", "login": "登录", "signup": "注册" },
     "stats": { "created": "已创作", "totalScore": "总分", "upvotes": "总赞同", "downvotes": "总反对" },
     "actions": { "edit": "编辑资料", "viewFish": "查看全部鱼", "visitTank": "进入鱼缸", "share": "分享资料" }
+  }
+  ,
+  "common": {
+    "anonymous": "匿名"
   }
 }
 
