@@ -3,6 +3,8 @@
 
 const swimCanvas = document.getElementById('swim-canvas');
 const swimCtx = swimCanvas.getContext('2d');
+// Avoid subpixel smoothing artifacts when drawing 1px-wide slices
+swimCtx.imageSmoothingEnabled = false;
 const fishes = [];
 
 // Food system
@@ -1604,7 +1606,10 @@ function animateFishes() {
             swimY = fish.y + Math.sin(time + fish.phase) * currentAmplitude;
         }
 
-        drawWigglingFish(fish, fish.x, swimY, fish.direction, time, fish.phase);
+        // Snap base x/y to integers to reduce subpixel seams
+        const baseX = (fish.x | 0);
+        const baseY = (swimY | 0);
+        drawWigglingFish(fish, baseX, baseY, fish.direction, time, fish.phase);
     }
 
     // Render food pellets
@@ -1696,15 +1701,22 @@ function drawWigglingFish(fish, x, y, direction, time, phase) {
             drawX = x + i - wiggle;
         }
         swimCtx.save();
-        swimCtx.translate(drawX, y);
+        // Snap to integer pixels to prevent vertical seams between 1px columns
+        const dx = (drawX | 0); // fast floor
+        const dy = (y | 0);
+        swimCtx.translate(dx, dy);
 
         // Apply scale for entering fish
         if (fish.isEntering && scale !== 1) {
+            // Use nearest-neighbor-style scaling to avoid smoothing gaps on columns
+            swimCtx.imageSmoothingEnabled = false;
             swimCtx.scale(scale, scale);
         }
 
         // Flip upside down for dying fish
         if (fish.isDying) {
+            // Flip around the slice center to avoid half-pixel offsets
+            swimCtx.translate(0, h);
             swimCtx.scale(1, -1);
         }
 
