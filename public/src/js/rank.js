@@ -226,7 +226,7 @@ function createFishCard(fish) {
                 <div class="fish-artist">
                     <a href="profile.html?userId=${encodeURIComponent(fish.userId || 'Anonymous')}" 
                        style="color: inherit; text-decoration: none;">
-                        ${escapeHtml(fish.Artist || 'Anonymous')}
+                        ${escapeHtml((fish.artist || fish.Artist || 'Anonymous'))}
                     </a>
                 </div>
                 <div class="fish-date">${formatDate(fish.CreatedAt)}</div>
@@ -319,18 +319,20 @@ function updateSortButtonText() {
         let arrow = '';
         let tooltip = '';
 
+        const t = (k, fallback) => (window.i18n && typeof window.i18n.t === 'function') ? window.i18n.t(k) : fallback;
+
         switch (sortType) {
             case 'hot':
-                baseText = 'Sort by Hot';
+                baseText = t('rank.sort.hot', 'Sort by Hot');
                 break;
             case 'score':
-                baseText = 'Sort by Score';
+                baseText = t('rank.sort.score', 'Sort by Score');
                 break;
             case 'date':
-                baseText = 'Sort by Date';
+                baseText = t('rank.sort.date', 'Sort by Date');
                 break;
             case 'random':
-                baseText = 'Random Order';
+                baseText = t('rank.sort.random', 'Random Order');
                 tooltip = 'Show fish in random order';
                 break;
         }
