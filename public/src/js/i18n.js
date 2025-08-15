@@ -22,31 +22,41 @@
         return stored || detectBrowserLang();
     }
 
-    function getLocalesBasePath() {
-        // If current page is inside /public, locales live at ./locales/
-        // If current page is project root (e.g., /index.html), locales live at ./public/locales/
-        try {
-            const path = (window.location && window.location.pathname) || '';
-            const inPublic = path.includes('/public/') || path.endsWith('/public') || path.startsWith('/public');
-            return inPublic ? 'locales/' : 'public/locales/';
-        } catch (e) {
-            return 'locales/';
+    function getCandidateLocaleUrls(lang) {
+        // Try multiple locations to work for both local root and /public deployments
+        const urls = [];
+        // Prefer relative first (works on production where /public is the web root)
+        urls.push(`locales/${lang}.json`);
+        // Absolute from domain root
+        urls.push(`/locales/${lang}.json`);
+        // For local root index.html which serves assets from ./public
+        urls.push(`public/locales/${lang}.json`);
+        urls.push(`/public/locales/${lang}.json`);
+        return urls;
+    }
+
+    async function tryFetchUrls(urls) {
+        let lastError = null;
+        for (const url of urls) {
+            try {
+                const res = await fetch(url, { cache: 'no-store' });
+                if (res.ok) {
+                    return await res.json();
+                }
+                lastError = new Error('Failed to load ' + url);
+            } catch (err) {
+                lastError = err;
+            }
         }
+        throw lastError || new Error('Failed to load locales');
     }
 
     async function loadTranslations(lang) {
-        const base = getLocalesBasePath();
-        const url = base + lang + '.json';
         try {
-            const res = await fetch(url, { cache: 'no-store' });
-            if (!res.ok) throw new Error('Failed to load ' + url);
-            return await res.json();
+            return await tryFetchUrls(getCandidateLocaleUrls(lang));
         } catch (e) {
             if (lang !== DEFAULT_LANG) {
-                const fallbackUrl = base + DEFAULT_LANG + '.json';
-                const res = await fetch(fallbackUrl, { cache: 'no-store' });
-                if (!res.ok) throw new Error('Failed to load fallback ' + fallbackUrl);
-                return await res.json();
+                return await tryFetchUrls(getCandidateLocaleUrls(DEFAULT_LANG));
             }
             throw e;
         }
