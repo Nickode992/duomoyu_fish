@@ -1,0 +1,38 @@
+{
+  "common": {
+    "language": "Language"
+  },
+  "index": {
+    "title": "Draw a Fish!",
+    "subtitle": "(facing right please)",
+    "nav": {
+      "tank": "tank",
+      "swim": "make it swim!",
+      "rank": "rank",
+      "myTanks": "my tanks"
+    }
+  },
+  "login": {
+    "title": "Fish Login",
+    "tabs": {
+      "signin": "Sign In",
+      "signup": "Sign Up"
+    },
+    "email": "Email:",
+    "password": "Password:",
+    "login": "Login",
+    "register": "Register",
+    "forgot": "Forgot Password?",
+    "forgotTitle": "Enter your email address:",
+    "sendReset": "Send Reset Email",
+    "backToSignin": "Back to Sign In",
+    "already": {
+      "header": "You are already logged in!",
+      "goToTanks": "Go to My Tanks",
+      "logout": "Logout"
+    },
+    "backToDraw": "Back To Draw"
+  }
+}
+
+

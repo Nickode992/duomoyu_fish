@@ -1,0 +1,38 @@
+{
+  "common": {
+    "language": "语言"
+  },
+  "index": {
+    "title": "画一条鱼！",
+    "subtitle": "（请朝右）",
+    "nav": {
+      "tank": "鱼缸",
+      "swim": "让它游起来！",
+      "rank": "排行",
+      "myTanks": "我的鱼缸"
+    }
+  },
+  "login": {
+    "title": "登录",
+    "tabs": {
+      "signin": "登录",
+      "signup": "注册"
+    },
+    "email": "邮箱：",
+    "password": "密码：",
+    "login": "登录",
+    "register": "注册",
+    "forgot": "忘记密码？",
+    "forgotTitle": "请输入你的邮箱：",
+    "sendReset": "发送重置邮件",
+    "backToSignin": "返回登录",
+    "already": {
+      "header": "你已经登录了！",
+      "goToTanks": "进入我的鱼缸",
+      "logout": "退出登录"
+    },
+    "backToDraw": "返回画板"
+  }
+}
+
+
