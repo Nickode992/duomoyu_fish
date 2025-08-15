@@ -1,11 +1,10 @@
 User-agent: *
 Allow: /
 
-# Allow crawling of main content
+# Allow crawling of main content (temporarily hide fishtanks)
 Allow: /index.html
 Allow: /tank.html
 Allow: /rank.html
-Allow: /fishtanks.html
 Allow: /profile.html
 Allow: /login.html
 

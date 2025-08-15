@@ -33,7 +33,7 @@ function createSpecialFooter() {
         <a href="index.html" style="color: #0066cc; text-decoration: underline;">draw</a>
         | <a href="tank.html" style="color: #0066cc; text-decoration: underline;">public tank</a>
         | <a href="rank.html" style="color: #0066cc; text-decoration: underline;">rankings</a>
-        | <a href="fishtanks.html" id="my-tanks-link" style="color: #0066cc; text-decoration: underline;">my tanks</a>
+        | <a href="fishtanks.html" id="my-tanks-link" style="color: #0066cc; text-decoration: underline; display:none" aria-hidden="true" tabindex="-1">my tanks</a>
         | <a href="login.html" id="auth-link" style="color: #0066cc; text-decoration: underline;">login</a>
         <br><br>
         © duomoyu.life | Credit: built upon <a href="https://github.com/aldenhallak/fishes" style="color: #0066cc; text-decoration: underline;" target="_blank" rel="noopener">DrawAFish</a> by <a href="https://fifteen.games" style="color: #0066cc; text-decoration: underline;" target="_blank" rel="noopener">fifteen.games</a> | 

@@ -287,7 +287,8 @@ class ModalManager {
                 <div class="no-tanks-message">
                     <h3>No tanks found</h3>
                     <p>You don't have any tanks yet. Create your first tank to start collecting fish!</p>
-                    <a href="fishtanks.html" class="btn">Create First Tank</a>
+                    <!-- Temporarily hide link to My Tanks until backend is ready -->
+                    <a href="fishtanks.html" class="btn" style="display:none" aria-hidden="true" tabindex="-1">Create First Tank</a>
                 </div>
             `;
         } else {

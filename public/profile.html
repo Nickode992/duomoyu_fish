@@ -28,7 +28,7 @@
         <a href="index.html" data-i18n="nav.draw">draw</a>
         <a href="tank.html" data-i18n="nav.tank">tank</a>
         <a href="rank.html" data-i18n="nav.rankings">rankings</a>
-        <a href="fishtanks.html" id="my-tanks-link" data-i18n="nav.myTanks">my tanks</a>
+        <a href="fishtanks.html" id="my-tanks-link" data-i18n="nav.myTanks" style="display:none" aria-hidden="true" tabindex="-1">my tanks</a>
         <a href="login.html" id="auth-link" data-i18n="nav.login">login</a>
     </div>
     
@@ -84,7 +84,7 @@
             <div class="profile-actions">
                 <button id="edit-profile-btn" class="action-btn" onclick="toggleEditProfile()" data-i18n="profile.actions.edit">Edit Profile</button>
                 <a href="#" id="view-fish-btn" class="action-btn" data-i18n="profile.actions.viewFish">View All Fish</a>
-                <a href="#" id="visit-tank-btn" class="action-btn primary" data-i18n="profile.actions.visitTank">Visit Tank</a>
+                <a href="#" id="visit-tank-btn" class="action-btn primary" data-i18n="profile.actions.visitTank" style="display:none" aria-hidden="true" tabindex="-1">Visit Tank</a>
                 <button onclick="shareProfile()" class="action-btn" data-i18n="profile.actions.share">Share Profile</button>
             </div>
         </div>

@@ -30,8 +30,8 @@ function updateActionButtons(profile, profileUserId, isCurrentUser, isLoggedIn =
         // For current user, show their tanks and fish
         viewFishBtn.href = `rank.html?userId=${encodeURIComponent(profileUserId)}`;
         viewFishBtn.textContent = isLoggedIn ? 'View My Fish' : 'View My Local Fish';
-        visitTankBtn.href = 'fishtanks.html';
-        visitTankBtn.textContent = isLoggedIn ? 'My Tanks' : 'My Local Tanks';
+        // Temporarily hide/disable My Tanks entry
+        visitTankBtn.style.display = 'none';
 
         // Show edit profile button for current user only if logged in
         if (isLoggedIn) {
@@ -43,8 +43,8 @@ function updateActionButtons(profile, profileUserId, isCurrentUser, isLoggedIn =
         // For other users, show their public content
         viewFishBtn.href = `rank.html?userId=${encodeURIComponent(profileUserId)}`;
         viewFishBtn.textContent = `View ${displayName}'s Fish`;
-        visitTankBtn.href = `fishtanks.html?userId=${encodeURIComponent(profileUserId)}`;
-        visitTankBtn.textContent = `View ${displayName}'s Tanks`;
+        // Temporarily hide/disable My Tanks entry
+        visitTankBtn.style.display = 'none';
 
         // Hide edit profile button for other users
         hideEditProfileButton();

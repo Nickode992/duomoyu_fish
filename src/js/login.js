@@ -62,7 +62,7 @@
 
   // Navigate to tanks page
   function goToTanks() {
-    window.location.href = '/fishtanks.html';
+    window.location.href = '/index.html';
   }
 
   // Logout and stay on login page
@@ -96,8 +96,8 @@
       return validateRedirectUrl(storedRedirect);
     }
     
-    // Default redirect to fishtanks page
-    return '/fishtanks.html';
+    // Default redirect to home page (temporarily hide my tanks)
+    return '/index.html';
   }
 
   // Validate and clean up redirect URL for security
@@ -110,8 +110,8 @@
         if (redirectUrl.origin === currentOrigin) {
           return redirectUrl.pathname + redirectUrl.search;
         }
-        // If different origin, redirect to default
-        return '/fishtanks.html';
+        // If different origin, redirect to default (home)
+        return '/index.html';
       }
       
       // If it's a relative URL, use it as-is (but ensure it starts with /)
@@ -121,9 +121,9 @@
       
       return url;
     } catch (e) {
-      // If URL parsing fails, default to fishtanks
+      // If URL parsing fails, default to home
       console.warn('Invalid redirect URL:', url);
-      return '/fishtanks.html';
+      return '/index.html';
     }
   }
 

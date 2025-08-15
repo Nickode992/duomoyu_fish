@@ -869,6 +869,10 @@
     </style>
 </head>
 <body>
+    <script>
+        // Temporarily disable direct access to My Tanks until backend is ready
+        window.location.replace('index.html');
+    </script>
     <div class="fishtanks-container">
         <div class="page-header">
             <h1 data-i18n="fishtanks.title">My Fish Tanks</h1>
@@ -880,7 +884,7 @@
             <a href="tank.html" data-i18n="nav.tank">tank</a>
             <a href="rank.html" data-i18n="nav.rankings">rank</a>
             <a href="profile.html" data-i18n="nav.profile">profile</a>
-            <a href="fishtanks.html" id="my-tanks-link" data-i18n="nav.myTanks">my tanks</a>
+            <a href="fishtanks.html" id="my-tanks-link" data-i18n="nav.myTanks" style="display:none" aria-hidden="true" tabindex="-1">my tanks</a>
             <a href="login.html" id="auth-link" data-i18n="nav.login">login</a>
         </div>
 
