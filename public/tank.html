@@ -410,28 +410,28 @@
   <canvas id="swim-canvas" width="800" height="400" style="border:1px solid #888; background:#e0f7fa; display:block; margin: 0 auto 0 auto;"></canvas>
   
   <div class="controls-container" style="text-align: center; margin-top: 15px; font-size: 12px; color: #666;">
-    View: 
+    <span data-i18n="tank.view">View:</span> 
     <select id="tank-sort" style="font-size: 11px; margin: 0 5px;">
-      <option value="recent">Most Recent</option>
-      <option value="popular">Most Popular</option>
-      <option value="random">Random</option>
+      <option value="recent" data-i18n="tank.sort.recent">Most Recent</option>
+      <option value="popular" data-i18n="tank.sort.popular">Most Popular</option>
+      <option value="random" data-i18n="tank.sort.random">Random</option>
     </select>
-    <button id="refresh-tank" style="font-size: 11px; margin-left: 5px;">refresh</button>
+    <button id="refresh-tank" style="font-size: 11px; margin-left: 5px;" data-i18n="tank.refresh">refresh</button>
     | 
     <label style="font-size: 11px; margin-left: 5px;">
       <input type="checkbox" id="notifications-toggle" checked style="margin-right: 3px;">
-      notifications
+      <span data-i18n="tank.notifications">notifications</span>
     </label>
     | 
-    <a href="rank.html" style="color: #0066cc; text-decoration: underline; font-size: 11px;">rankings</a>
+    <a href="rank.html" style="color: #0066cc; text-decoration: underline; font-size: 11px;" data-i18n="tank.rankings">rankings</a>
     | 
-    <a href="profile.html" style="color: #0066cc; text-decoration: underline; font-size: 11px;">profile</a>
+    <a href="profile.html" style="color: #0066cc; text-decoration: underline; font-size: 11px;" data-i18n="tank.profile">profile</a>
     | 
-    <a href="fishtanks.html" id="my-tanks-link" style="color: #0066cc; text-decoration: underline; font-size: 11px;">my tanks</a>
+    <a href="fishtanks.html" id="my-tanks-link" style="color: #0066cc; text-decoration: underline; font-size: 11px;" data-i18n="tank.myTanks">my tanks</a>
     
     <div style="margin-top: 8px;">
       <label style="font-size: 11px; color: #666;">
-        Fish count: <span id="fish-count-display" style="font-weight: 500;">50</span>
+        <span data-i18n="tank.fishCount">Fish count:</span> <span id="fish-count-display" style="font-weight: 500;">50</span>
         <input type="range" id="fish-count-slider" min="1" max="100" value="50" 
                style="width: 120px; margin: 0 8px; vertical-align: middle; cursor: pointer;">
         <span id="current-fish-count" style="font-size: 10px; color: #999;"></span>
@@ -439,16 +439,17 @@
     </div>
     
     <div style="margin-top: 8px; font-size: 11px; color: #666;">
-      <strong>Feed the fish:</strong> 
-      <span class="desktop-only">Hold Shift + Click or Right-click</span>
-      <span class="mobile-only">Double-tap or Long-press</span>
-      to drop food pellets
+      <strong data-i18n="tank.feed.title">Feed the fish:</strong> 
+      <span class="desktop-only" data-i18n="tank.feed.desktop">Hold Shift + Click or Right-click</span>
+      <span class="mobile-only" data-i18n="tank.feed.mobile">Double-tap or Long-press</span>
+      <span data-i18n="tank.feed.tail">to drop food pellets</span>
     </div>
     
-    <div id="loading-indicator" style="display: none; font-size: 11px; color: #999; margin-top: 5px;">
+    <div id="loading-indicator" style="display: none; font-size: 11px; color: #999; margin-top: 5px;" data-i18n="tank.loading">
       loading...
     </div>
   </div>
+  <script src="src/js/i18n.js"></script>
   <script src="src/js/footer-utils.js"></script>
   <!-- Firebase disabled
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>

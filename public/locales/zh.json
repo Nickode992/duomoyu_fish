@@ -38,6 +38,60 @@
     },
     "backToDraw": "返回画板"
   }
+  ,
+  "nav": {
+    "title": "导航：",
+    "draw": "画板",
+    "tank": "鱼缸",
+    "rankings": "排行",
+    "profile": "个人",
+    "myTanks": "我的鱼缸",
+    "login": "登录"
+  },
+  "tank": {
+    "view": "查看：",
+    "sort": { "recent": "最新", "popular": "最热", "random": "随机" },
+    "refresh": "刷新",
+    "notifications": "通知",
+    "rankings": "排行",
+    "profile": "个人",
+    "myTanks": "我的鱼缸",
+    "fishCount": "鱼数量：",
+    "feed": { "title": "喂鱼：", "desktop": "按住 Shift + 点击 或 右键", "mobile": "双击或长按", "tail": "投放鱼粮" },
+    "loading": "加载中..."
+  },
+  "fishtankView": {
+    "loading": "鱼缸加载中...",
+    "stats": { "fish": "鱼：", "views": "浏览：", "created": "创建：", "privacy": "隐私：" },
+    "fishSection": { "title": "鱼缸内的鱼", "loading": "正在加载鱼...", "empty": "这个鱼缸还空空的，添加一些鱼吧！" },
+    "addFish": { "title": "添加鱼到鱼缸", "loading": "正在加载可添加的鱼...", "empty": "现在没有可添加到鱼缸的鱼。", "draw": "去画鱼" }
+  },
+  "fishtanks": {
+    "title": "我的鱼缸",
+    "authRequired": "请登录后管理你的鱼缸",
+    "tabs": { "my": "我的鱼缸", "create": "新建鱼缸", "discover": "发现" },
+    "search": { "placeholder": "按名称或描述搜索鱼缸..." },
+    "filter": { "all": "全部", "public": "仅公开", "private": "仅私有" },
+    "sort": { "updated": "最近更新", "created": "最近创建", "name": "名称（A-Z）", "fish": "鱼最多", "views": "浏览最多" },
+    "loading": { "my": "正在加载你的鱼缸...", "public": "正在加载公开鱼缸..." },
+    "empty": { "title": "没有找到鱼缸！", "desc": "创建你的第一个鱼缸开启旅程。", "cta": "创建第一个鱼缸" },
+    "create": { "title": "创建新鱼缸", "name": "鱼缸名称 *", "namePlaceholder": "请输入鱼缸名称", "desc": "描述", "descPlaceholder": "可选描述", "public": "公开（他人可查看并添加）", "submit": "创建鱼缸" },
+    "edit": { "title": "编辑鱼缸", "public": "将此鱼缸设为公开", "update": "更新鱼缸" },
+    "share": { "title": "分享鱼缸", "desc": "把这个链接分享给朋友即可查看你的鱼缸：", "copy": "复制链接" },
+    "add": { "title": "添加鱼到鱼缸", "loading": "正在加载可添加的鱼...", "emptyTitle": "暂无可用的鱼", "emptyDesc": "当前没有可添加到鱼缸的鱼。", "draw": "去画鱼" }
+  },
+  "rank": {
+    "title": "鱼类排行",
+    "sort": { "hot": "按热度", "score": "按分数", "date": "按时间", "random": "随机" },
+    "loading": "正在加载..."
+  },
+  "profile": {
+    "title": "个人资料",
+    "loading": "正在加载资料...",
+    "empty": { "title": "未登录", "desc": "请登录后查看你的资料", "login": "登录", "signup": "注册" },
+    "stats": { "created": "已创作", "totalScore": "总分", "upvotes": "总赞同", "downvotes": "总反对" },
+    "actions": { "edit": "编辑资料", "viewFish": "查看全部鱼", "visitTank": "进入鱼缸", "share": "分享资料" }
+  }
 }
 
 

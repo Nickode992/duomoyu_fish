@@ -871,96 +871,96 @@
 <body>
     <div class="fishtanks-container">
         <div class="page-header">
-            <h1>My Fish Tanks</h1>
+            <h1 data-i18n="fishtanks.title">My Fish Tanks</h1>
         </div>
         
         <div class="control-panel">
-            <strong>Navigation:</strong>
-            <a href="index.html">draw</a>
-            <a href="tank.html">tank</a>
-            <a href="rank.html">rank</a>
-            <a href="profile.html">profile</a>
-            <a href="fishtanks.html" id="my-tanks-link">my tanks</a>
-            <a href="login.html" id="auth-link">login</a>
+            <strong data-i18n="nav.title">Navigation:</strong>
+            <a href="index.html" data-i18n="nav.draw">draw</a>
+            <a href="tank.html" data-i18n="nav.tank">tank</a>
+            <a href="rank.html" data-i18n="nav.rankings">rank</a>
+            <a href="profile.html" data-i18n="nav.profile">profile</a>
+            <a href="fishtanks.html" id="my-tanks-link" data-i18n="nav.myTanks">my tanks</a>
+            <a href="login.html" id="auth-link" data-i18n="nav.login">login</a>
         </div>
 
         <div class="status-bar" id="auth-info">
-            <div id="auth-status">Please log in to manage your fish tanks</div>
+            <div id="auth-status" data-i18n="fishtanks.authRequired">Please log in to manage your fish tanks</div>
         </div>
 
         <div class="control-panel">
-            <button class="tab-btn active" onclick="showTab('my-tanks')">My Tanks</button>
-            <button class="tab-btn" onclick="showTab('create-tank')">Create Tank</button>
-            <button class="tab-btn" onclick="showTab('public-tanks')">Discover</button>
+            <button class="tab-btn active" onclick="showTab('my-tanks')" data-i18n="fishtanks.tabs.my">My Tanks</button>
+            <button class="tab-btn" onclick="showTab('create-tank')" data-i18n="fishtanks.tabs.create">Create Tank</button>
+            <button class="tab-btn" onclick="showTab('public-tanks')" data-i18n="fishtanks.tabs.discover">Discover</button>
         </div>
 
         <!-- Search and Filter Controls -->
         <div class="search-controls" id="search-controls" style="display: none;">
             <div class="search-bar">
-                <input type="text" id="tank-search" placeholder="Search tanks by name or description..." onkeyup="filterTanks()">
+                <input type="text" id="tank-search" placeholder="Search tanks by name or description..." data-i18n-attr="placeholder:fishtanks.search.placeholder" onkeyup="filterTanks()">
                 <button class="search-btn" onclick="clearSearch()">✕</button>
             </div>
             <div class="filter-controls">
                 <select id="tank-filter" onchange="filterTanks()">
-                    <option value="all">All Tanks</option>
-                    <option value="public">Public Only</option>
-                    <option value="private">Private Only</option>
+                    <option value="all" data-i18n="fishtanks.filter.all">All Tanks</option>
+                    <option value="public" data-i18n="fishtanks.filter.public">Public Only</option>
+                    <option value="private" data-i18n="fishtanks.filter.private">Private Only</option>
                 </select>
                 <select id="tank-sort" onchange="sortTanks()">
-                    <option value="updated">Recently Updated</option>
-                    <option value="created">Recently Created</option>
-                    <option value="name">Name (A-Z)</option>
-                    <option value="fish">Most Fish</option>
-                    <option value="views">Most Views</option>
+                    <option value="updated" data-i18n="fishtanks.sort.updated">Recently Updated</option>
+                    <option value="created" data-i18n="fishtanks.sort.created">Recently Created</option>
+                    <option value="name" data-i18n="fishtanks.sort.name">Name (A-Z)</option>
+                    <option value="fish" data-i18n="fishtanks.sort.fish">Most Fish</option>
+                    <option value="views" data-i18n="fishtanks.sort.views">Most Views</option>
                 </select>
             </div>
         </div>
 
         <!-- My Tanks Tab -->
         <div id="my-tanks" class="tab-content active">
-            <div id="my-tanks-loading" class="loading" style="display: none;">Loading your tanks...</div>
+            <div id="my-tanks-loading" class="loading" style="display: none;" data-i18n="fishtanks.loading.my">Loading your tanks...</div>
             <div id="my-tanks-error" class="error" style="display: none;"></div>
             <div id="my-tanks-grid" class="tank-grid"></div>
             <div id="my-tanks-empty" class="empty-state" style="display: none;">
-                <h3>No tanks found!</h3>
-                <p>Create your first fish tank to get started.</p>
-                <button class="btn" onclick="showTab('create-tank')">Create First Tank</button>
+                <h3 data-i18n="fishtanks.empty.title">No tanks found!</h3>
+                <p data-i18n="fishtanks.empty.desc">Create your first fish tank to get started.</p>
+                <button class="btn" onclick="showTab('create-tank')" data-i18n="fishtanks.empty.cta">Create First Tank</button>
             </div>
         </div>
 
         <!-- Create Tank Tab -->
         <div id="create-tank" class="tab-content">
             <div class="create-tank-form">
-                <h2>Create New Tank</h2>
+                <h2 data-i18n="fishtanks.create.title">Create New Tank</h2>
                 <div id="create-tank-error" class="error" style="display: none;"></div>
                 <div id="create-tank-success" class="success" style="display: none;"></div>
                 
                 <form id="create-tank-form">
                     <div class="form-group">
-                        <label for="tank-name">Tank Name *</label>
-                        <input type="text" id="tank-name" name="name" required maxlength="50">
+                        <label for="tank-name" data-i18n="fishtanks.create.name">Tank Name *</label>
+                        <input type="text" id="tank-name" name="name" required maxlength="50" data-i18n-attr="placeholder:fishtanks.create.namePlaceholder">
                     </div>
                     
                     <div class="form-group">
-                        <label for="tank-description">Description</label>
-                        <textarea id="tank-description" name="description" maxlength="200"></textarea>
+                        <label for="tank-description" data-i18n="fishtanks.create.desc">Description</label>
+                        <textarea id="tank-description" name="description" maxlength="200" data-i18n-attr="placeholder:fishtanks.create.descPlaceholder"></textarea>
                     </div>
                     
                     <div class="form-group">
                         <label>
                             <input type="checkbox" id="tank-public" name="isPublic" checked>
-                            Make public (others can view and add fish)
+                            <span data-i18n="fishtanks.create.public">Make public (others can view and add fish)</span>
                         </label>
                     </div>
                     
-                    <button type="submit" class="btn">Create Tank</button>
+                    <button type="submit" class="btn" data-i18n="fishtanks.create.submit">Create Tank</button>
                 </form>
             </div>
         </div>
 
         <!-- Public Tanks Tab -->
         <div id="public-tanks" class="tab-content">
-            <div id="public-tanks-loading" class="loading" style="display: none;">Loading public tanks...</div>
+            <div id="public-tanks-loading" class="loading" style="display: none;" data-i18n="fishtanks.loading.public">Loading public tanks...</div>
             <div id="public-tanks-error" class="error" style="display: none;"></div>
             <div id="public-tanks-grid" class="tank-grid"></div>
             <div class="control-panel" id="public-tanks-pagination"></div>
@@ -971,24 +971,24 @@
     <div id="edit-tank-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('edit-tank-modal')">&times;</span>
-            <h2>Edit Tank</h2>
+            <h2 data-i18n="fishtanks.edit.title">Edit Tank</h2>
             <div id="edit-tank-error" class="error" style="display: none;"></div>
             <form id="edit-tank-form">
                 <div class="form-group">
-                    <label for="edit-tank-name">Tank Name *</label>
+                    <label for="edit-tank-name" data-i18n="fishtanks.create.name">Tank Name *</label>
                     <input type="text" id="edit-tank-name" required maxlength="50">
                 </div>
                 <div class="form-group">
-                    <label for="edit-tank-description">Description</label>
+                    <label for="edit-tank-description" data-i18n="fishtanks.create.desc">Description</label>
                     <textarea id="edit-tank-description" maxlength="200"></textarea>
                 </div>
                 <div class="form-group">
                     <div class="checkbox-group">
                         <input type="checkbox" id="edit-tank-public">
-                        <label for="edit-tank-public">Make this tank public</label>
+                        <label for="edit-tank-public" data-i18n="fishtanks.edit.public">Make this tank public</label>
                     </div>
                 </div>
-                <button type="submit" class="btn">Update Tank</button>
+                <button type="submit" class="btn" data-i18n="fishtanks.edit.update">Update Tank</button>
             </form>
         </div>
     </div>
@@ -997,10 +997,10 @@
     <div id="share-tank-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('share-tank-modal')">&times;</span>
-            <h2>Share Tank</h2>
-            <p>Share this URL to let others view your tank:</p>
+            <h2 data-i18n="fishtanks.share.title">Share Tank</h2>
+            <p data-i18n="fishtanks.share.desc">Share this URL to let others view your tank:</p>
             <div class="share-url" id="share-url"></div>
-            <button class="btn" onclick="copyShareUrl()">Copy URL</button>
+            <button class="btn" onclick="copyShareUrl()" data-i18n="fishtanks.share.copy">Copy URL</button>
         </div>
     </div>
 
@@ -1008,19 +1008,20 @@
     <div id="add-fish-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('add-fish-modal')">&times;</span>
-            <h2>Add Fish to Tank</h2>
+            <h2 data-i18n="fishtanks.add.title">Add Fish to Tank</h2>
             <div id="add-fish-error" class="error" style="display: none;"></div>
             <div id="add-fish-success" class="success" style="display: none;"></div>
-            <div id="user-fish-loading" class="loading" style="display: none;">Loading available fish...</div>
+            <div id="user-fish-loading" class="loading" style="display: none;" data-i18n="fishtanks.add.loading">Loading available fish...</div>
             <div id="user-fish-grid" class="fish-preview"></div>
             <div id="user-fish-empty" class="empty-state" style="display: none;">
-                <h3>No fish available</h3>
-                <p>No fish are available to add to your tank right now.</p>
-                <a href="index.html" class="btn">Draw Fish</a>
+                <h3 data-i18n="fishtanks.add.emptyTitle">No fish available</h3>
+                <p data-i18n="fishtanks.add.emptyDesc">No fish are available to add to your tank right now.</p>
+                <a href="index.html" class="btn" data-i18n="fishtanks.add.draw">Draw Fish</a>
             </div>
         </div>
     </div>
 
+    <script src="src/js/i18n.js"></script>
     <script src="src/js/footer-utils.js"></script>
     <!-- Firebase disabled
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>

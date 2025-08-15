@@ -25,30 +25,30 @@
 </head>
 <body>
     <div class="nav-links">
-        <a href="index.html">draw</a>
-        <a href="tank.html">tank</a>
-        <a href="rank.html">rankings</a>
-        <a href="fishtanks.html" id="my-tanks-link">my tanks</a>
-        <a href="login.html" id="auth-link">login</a>
+        <a href="index.html" data-i18n="nav.draw">draw</a>
+        <a href="tank.html" data-i18n="nav.tank">tank</a>
+        <a href="rank.html" data-i18n="nav.rankings">rankings</a>
+        <a href="fishtanks.html" id="my-tanks-link" data-i18n="nav.myTanks">my tanks</a>
+        <a href="login.html" id="auth-link" data-i18n="nav.login">login</a>
     </div>
     
     <div class="profile-container">
         <div class="profile-header">
-            <h1>User Profile</h1>
+            <h1 data-i18n="profile.title">User Profile</h1>
         </div>
         
-        <div id="loading" class="loading" style="display: none;">
+        <div id="loading" class="loading" style="display: none;" data-i18n="profile.loading">
             Loading profile...
         </div>
         
         <div id="error" class="error" style="display: none;"></div>
         
         <div id="profile-empty" class="profile-empty">
-            <h2>No user logged in</h2>
-            <p>Please log in to view your profile</p>
+            <h2 data-i18n="profile.empty.title">No user logged in</h2>
+            <p data-i18n="profile.empty.desc">Please log in to view your profile</p>
             <div class="profile-actions">
-                <a href="login.html" class="action-btn primary">Log In</a>
-                <a href="login.html?signup=true" class="action-btn">Sign Up</a>
+                <a href="login.html" class="action-btn primary" data-i18n="profile.empty.login">Log In</a>
+                <a href="login.html?signup=true" class="action-btn" data-i18n="profile.empty.signup">Sign Up</a>
             </div>
         </div>
         
@@ -64,32 +64,33 @@
                 <div class="profile-stats">
                     <div class="stat-item">
                         <div class="stat-value" id="fish-count">0</div>
-                        <div class="stat-label">Fish Created</div>
+                        <div class="stat-label" data-i18n="profile.stats.created">Fish Created</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-value" id="total-score">0</div>
-                        <div class="stat-label">Total Score</div>
+                        <div class="stat-label" data-i18n="profile.stats.totalScore">Total Score</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-value" id="total-upvotes">0</div>
-                        <div class="stat-label">Total Upvotes</div>
+                        <div class="stat-label" data-i18n="profile.stats.upvotes">Total Upvotes</div>
                     </div>
                     <div class="stat-item">
                         <div class="stat-value" id="total-downvotes">0</div>
-                        <div class="stat-label">Total Downvotes</div>
+                        <div class="stat-label" data-i18n="profile.stats.downvotes">Total Downvotes</div>
                     </div>
                 </div>
             </div>
             
             <div class="profile-actions">
-                <button id="edit-profile-btn" class="action-btn" onclick="toggleEditProfile()">Edit Profile</button>
-                <a href="#" id="view-fish-btn" class="action-btn">View All Fish</a>
-                <a href="#" id="visit-tank-btn" class="action-btn primary">Visit Tank</a>
-                <button onclick="shareProfile()" class="action-btn">Share Profile</button>
+                <button id="edit-profile-btn" class="action-btn" onclick="toggleEditProfile()" data-i18n="profile.actions.edit">Edit Profile</button>
+                <a href="#" id="view-fish-btn" class="action-btn" data-i18n="profile.actions.viewFish">View All Fish</a>
+                <a href="#" id="visit-tank-btn" class="action-btn primary" data-i18n="profile.actions.visitTank">Visit Tank</a>
+                <button onclick="shareProfile()" class="action-btn" data-i18n="profile.actions.share">Share Profile</button>
             </div>
         </div>
     </div>
     
+    <script src="src/js/i18n.js"></script>
     <script src="src/js/footer-utils.js"></script>
     <!-- Firebase disabled
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
