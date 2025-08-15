@@ -1,6 +1,7 @@
 name = "duomoyu"
 main = "worker/src/index.js"
 compatibility_date = "2025-08-14"
+workers_dev = false
 
 [assets]
 directory = "./public"
@@ -22,6 +23,7 @@ bucket_name = "duomoyu-images"
 [vars]
 JWT_SECRET = "change-me-in-prod"
 RESEND_FROM = "no-reply@duomoyu.life"
+R2_PUBLIC_BASE_URL = "https://r2.duomoyu.life"
 
 routes = [
   { pattern = "duomoyu.life", custom_domain = true },
