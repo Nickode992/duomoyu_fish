@@ -852,10 +852,17 @@ function showWelcomeBackMessage() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     // Show welcome back message for returning users
     showWelcomeBackMessage();
     
+    // Ensure i18n translations have loaded before rendering modal text
+    try {
+        if (window.i18n && !window.i18n.isReady && window.i18n.readyPromise) {
+            await window.i18n.readyPromise;
+        }
+    } catch (e) { /* no-op */ }
+
     const today = new Date().toDateString();
     const lastFishDate = localStorage.getItem('lastFishDate');
     console.log(`Last fish date: ${lastFishDate}, Today: ${today}`);

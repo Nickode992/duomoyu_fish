@@ -3,6 +3,9 @@
     const DEFAULT_LANG = 'en';
     let currentLang = null;
     let translations = {};
+    let i18nReadyResolve = null;
+    const i18nReadyPromise = new Promise((resolve) => { i18nReadyResolve = resolve; });
+    let i18nIsReady = false;
 
     function detectBrowserLang() {
         try {
@@ -20,9 +23,15 @@
     }
 
     function getLocalesBasePath() {
-        // Assets are referenced relatively from the HTML files (e.g., public/index.html)
-        // Other assets like css/js use paths like "src/..." so locales sit at "locales/..."
-        return 'locales/';
+        // If current page is inside /public, locales live at ./locales/
+        // If current page is project root (e.g., /index.html), locales live at ./public/locales/
+        try {
+            const path = (window.location && window.location.pathname) || '';
+            const inPublic = path.includes('/public/') || path.endsWith('/public') || path.startsWith('/public');
+            return inPublic ? 'locales/' : 'public/locales/';
+        } catch (e) {
+            return 'locales/';
+        }
     }
 
     async function loadTranslations(lang) {
@@ -86,6 +95,12 @@
         localStorage.setItem(I18N_STORAGE_KEY, lang);
         translations = await loadTranslations(lang);
         applyTranslations(document);
+        if (!i18nIsReady && i18nReadyResolve) {
+            i18nIsReady = true;
+            try { document.dispatchEvent(new Event('i18n-ready')); } catch (e) {}
+            i18nReadyResolve();
+            i18nReadyResolve = null;
+        }
     }
 
     function createLanguageSwitcher() {
@@ -106,6 +121,12 @@
         currentLang = lang;
         translations = await loadTranslations(lang);
         applyTranslations(document);
+        if (!i18nIsReady && i18nReadyResolve) {
+            i18nIsReady = true;
+            try { document.dispatchEvent(new Event('i18n-ready')); } catch (e) {}
+            i18nReadyResolve();
+            i18nReadyResolve = null;
+        }
     }
 
     window.i18n = {
@@ -114,7 +135,9 @@
         setLanguage,
         applyTranslations,
         translateElement,
-        createLanguageSwitcher
+        createLanguageSwitcher,
+        get isReady() { return i18nIsReady; },
+        readyPromise: i18nReadyPromise
     };
 
     if (document.readyState === 'loading') {
