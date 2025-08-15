@@ -373,6 +373,7 @@ function createFishObject({
 }
 
 function loadFishImageToTank(imgUrl, fishData, onDone) {
+    imgUrl = normalizeFishImageUrl(imgUrl);
     const img = new window.Image();
     img.crossOrigin = 'anonymous';
     img.onload = function () {
@@ -605,7 +606,8 @@ async function loadAdditionalFish(sortType, count) {
                 continue;
             }
 
-            const imageUrl = data.image || data.Image; // Try lowercase first, then uppercase
+            let imageUrl = data.image || data.Image; // Try lowercase first, then uppercase
+            imageUrl = normalizeFishImageUrl(imageUrl);
 
             // Skip if invalid image or already exists
             if (!imageUrl || typeof imageUrl !== 'string' || !imageUrl.startsWith('http')) {
@@ -803,7 +805,8 @@ async function loadInitialFish(sortType = 'recent') {
                 return;
             }
 
-            const imageUrl = data.image || data.Image; // Try lowercase first, then uppercase
+            let imageUrl = data.image || data.Image; // Try lowercase first, then uppercase
+            imageUrl = normalizeFishImageUrl(imageUrl);
             if (!imageUrl || typeof imageUrl !== 'string' || !imageUrl.startsWith('http')) {
                 console.warn('Skipping fish with invalid image:', fishId, data);
                 return;
@@ -891,7 +894,8 @@ async function checkForNewFish() {
                 return;
             }
 
-            const imageUrl = fishData.image || fishData.Image; // Try lowercase first, then uppercase
+            let imageUrl = fishData.image || fishData.Image; // Try lowercase first, then uppercase
+            imageUrl = normalizeFishImageUrl(imageUrl);
 
             if (!imageUrl || typeof imageUrl !== 'string' || !imageUrl.startsWith('http')) {
                 console.warn('Skipping fish with invalid image:', fishId, fishData);

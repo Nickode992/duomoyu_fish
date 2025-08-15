@@ -22,6 +22,7 @@ function testImageUrl(imgUrl) {
     }
 
     return new Promise((resolve) => {
+        imgUrl = normalizeFishImageUrl(imgUrl);
         const img = new Image();
         img.crossOrigin = 'anonymous';
 
@@ -69,6 +70,7 @@ function createFishImageDataUrl(imgUrl, callback) {
         return;
     }
 
+    imgUrl = normalizeFishImageUrl(imgUrl);
     const img = new Image();
     img.crossOrigin = 'anonymous';
     let isCompleted = false;

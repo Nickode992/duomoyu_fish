@@ -215,10 +215,7 @@ async function getR2Object(request, env) {
 }
 
 function publicR2UrlFromRequest(request, key, env) {
-	// Prefer public R2 custom domain if configured via env
-	if (env && env.R2_PUBLIC_BASE_URL) {
-		return `${String(env.R2_PUBLIC_BASE_URL).replace(/\/+$/, '')}/${key}`;
-	}
+	// Always return same-origin proxy to ensure CORS works in canvas and <img crossOrigin>
 	const origin = new URL(request.url).origin;
 	return `${origin}/r2/${key}`;
 }

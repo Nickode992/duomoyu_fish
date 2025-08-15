@@ -40,6 +40,26 @@ function calculateScore(fish) {
     return upvotes - downvotes;
 }
 
+// Normalize image URL to same-origin R2 proxy to avoid CORS when drawing to canvas
+function normalizeFishImageUrl(imgUrl) {
+    try {
+        if (!imgUrl || typeof imgUrl !== 'string') return imgUrl;
+        const r2Bases = [
+            'https://r2.duomoyu.life/',
+            'http://r2.duomoyu.life/'
+        ];
+        for (const base of r2Bases) {
+            if (imgUrl.startsWith(base)) {
+                const path = imgUrl.substring(base.length);
+                return `${window.location.origin}/r2/${path}`;
+            }
+        }
+        return imgUrl;
+    } catch (e) {
+        return imgUrl;
+    }
+}
+
 // Send vote to endpoint
 async function sendVote(fishId, voteType) {
     try {
