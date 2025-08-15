@@ -532,7 +532,7 @@ async function loadFishModel() {
     
     modelLoadPromise = (async () => {
         try {
-            ortSession = await window.ort.InferenceSession.create('https://r2.duomoyu.life/models/fish_doodle_classifier.onnx');
+            ortSession = await window.ort.InferenceSession.create('/fish_doodle_classifier.onnx');
             console.log('Fish model loaded successfully');
             return ortSession;
         } catch (error) {

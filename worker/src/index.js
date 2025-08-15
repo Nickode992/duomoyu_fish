@@ -20,10 +20,7 @@ export default {
 			}
 			// Serve ONNX model from R2 to avoid asset size limits
 			if (url.pathname === '/fish_doodle_classifier.onnx') {
-				const publicBase = (env && env.R2_PUBLIC_BASE_URL) ? String(env.R2_PUBLIC_BASE_URL).replace(/\/+$/, '') : '';
-				if (publicBase) {
-					return Response.redirect(`${publicBase}/models/fish_doodle_classifier.onnx`, 302);
-				}
+				// Always proxy via Worker so we can attach proper CORS headers
 				const proxyReq = new Request(new URL('/r2/models/fish_doodle_classifier.onnx', url.origin), request);
 				return await getR2Object(proxyReq, env);
 			}
@@ -194,7 +191,20 @@ async function getR2Object(request, env) {
 	const key = new URL(request.url).pathname.replace(/^\/r2\//, '');
 	if (!key) return badRequest('Missing key');
 	const obj = await env.BUCKET.get(key);
-	if (!obj) return json({ error: 'Not found' }, 404);
+	if (!obj) {
+		// Fallback: try to proxy from public R2 custom domain if configured
+		const publicBase = (env && env.R2_PUBLIC_BASE_URL) ? String(env.R2_PUBLIC_BASE_URL).replace(/\/+$/, '') : '';
+		if (publicBase) {
+			const resp = await fetch(`${publicBase}/${key}`, { method: 'GET' });
+			if (resp.ok) {
+				const headers = new Headers(resp.headers);
+				headers.set('Access-Control-Allow-Origin', '*');
+				headers.set('Vary', 'Origin');
+				return new Response(resp.body, { status: resp.status, headers });
+			}
+		}
+		return json({ error: 'Not found' }, 404);
+	}
 	const headers = new Headers();
 	obj.writeHttpMetadata(headers);
 	headers.set('etag', obj.httpEtag);
