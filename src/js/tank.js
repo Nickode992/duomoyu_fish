@@ -1114,13 +1114,13 @@ function showFishInfoModal(fish) {
     // Add voting controls using shared utility
     info += createVotingControlsHTML(fish.docId, fish.upvotes || 0, fish.downvotes || 0, false, 'modal-controls');
 
-    // Add "Add to Tank" button only if user is logged in
-    const userToken = localStorage.getItem('userToken');
-    if (userToken) {
-        info += `<div style='margin-top: 10px; text-align: center;'>`;
-        info += `<button onclick="showAddToTankModal('${fish.docId}')" style="border: 1px solid #000; padding: 4px 8px; cursor: pointer;">${(window.i18n && i18n.t)? i18n.t('tank.modal.btn.addToTank') : 'Add to Tank'}</button>`;
-        info += `</div>`;
-    }
+    // Temporarily hide "Add to Tank" button pending backend readiness
+    // const userToken = localStorage.getItem('userToken');
+    // if (userToken) {
+    //     info += `<div style='margin-top: 10px; text-align: center;'>`;
+    //     info += `<button onclick=\"showAddToTankModal('${fish.docId}')\" style=\"border: 1px solid #000; padding: 4px 8px; cursor: pointer;\">${(window.i18n && i18n.t)? i18n.t('tank.modal.btn.addToTank') : 'Add to Tank'}</button>`;
+    //     info += `</div>`;
+    // }
 
     info += `</div>`;
 

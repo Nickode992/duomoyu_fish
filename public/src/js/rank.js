@@ -215,8 +215,9 @@ function createFishCard(fish) {
     // Add highlighting classes and styles for user's fish
     const userFishClass = isCurrentUserFish ? ' user-fish-highlight' : '';
 
+    // Temporarily disable add-to-tank entry from ranking cards
     const fishImageContainer =
-        `<div class="fish-image-container" onclick="showAddToTankModal('${fish.docId}')" title="Click to add to your tank" style="cursor: pointer;">`;
+        `<div class="fish-image-container" style="cursor: default;">`;
     return `
         <div class="fish-card${userFishClass}" data-fish-id="${fish.docId}">
             ${fishImageContainer}

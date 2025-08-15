@@ -15,7 +15,7 @@
   2) Worker 读取 `formData`，写入 R2 `fish/{uuid}.png`，构造同域可读 URL `/r2/fish/{uuid}.png`；
   3) Worker 记录元数据到 D1（`fish` 表）并返回 JSON（`{success:true, data: {id, userId, artist, Image}}`）。
 - **模型文件（ONNX）**：
-  - 为绕过 25MiB 资产上限，模型放入 R2 `models/`；`GET /fish_doodle_classifier.onnx` 在 Worker 中转到 `GET /r2/models/fish_doodle_classifier.onnx`。
+  - 模型存放于 R2 `models/`；`GET /fish_doodle_classifier.onnx` 在 Worker 中 302 重定向到 R2 自定义域（`https://r2.duomoyu.life/models/fish_doodle_classifier.onnx`）；前端也直接从该自定义域加载模型。
 - **错误处理**：
   - Worker 顶层 try/catch，API 抛错统一 `application/json`；已修复此前错误落到 HTML 导致前端 JSON 解析失败的问题。
 
@@ -58,8 +58,10 @@
 
 ### 路由一览（当前）
 - 静态：`/*`（Assets）
-- 模型：`GET /fish_doodle_classifier.onnx` → R2 代理
-- 图片代理：`GET /r2/*` → R2 读取
+- 模型：`GET /fish_doodle_classifier.onnx` → 302 到 `https://r2.duomoyu.life/models/fish_doodle_classifier.onnx`
+- 图片直链/代理：
+  - 直链优先：Worker 生成的公共图片 URL 优先指向 `https://r2.duomoyu.life/fish/{uuid}.png`
+  - 代理保留：`GET /r2/*` 仍可读取 R2（用于回退或本地预览）
 - 鱼：`GET /api/fish`、`GET /api/fish/:id`
 - 投票：`POST /api/vote`
 - 举报：`POST /api/report`
@@ -92,6 +94,18 @@
 
 > 文档链接：[Custom Domains](https://developers.cloudflare.com/workers/configuration/routing/custom-domains/)
 
+### 资源域名（R2 自定义域）
+- Dashboard：为 R2 桶绑定自定义域 `r2.duomoyu.life`（同账号 zone）。
+- Wrangler 配置：
+  - `workers_dev = false`（显式禁用 workers.dev）
+  - `R2_PUBLIC_BASE_URL = "https://r2.duomoyu.life"`（供 Worker 生成直链）
+- Worker：
+  - 生成公共图片 URL 时优先使用 `env.R2_PUBLIC_BASE_URL`
+  - `/fish_doodle_classifier.onnx` 直接 302 到自定义域
+- 前端：
+  - `public/src/js/app.js` 与 `src/js/app.js` 中 ONNX 模型加载源改为 `https://r2.duomoyu.life/models/fish_doodle_classifier.onnx`
+- 建议：在 `r2.duomoyu.life` 上配置 CORS 头（`Access-Control-Allow-Origin: *` 等），以支持 `<img crossOrigin>` 与 Canvas。
+
 ### 主要命令（记录）
 ```bash
 npx wrangler login
@@ -107,7 +121,7 @@ npx wrangler deploy
 
 ### 注意事项
 - 资产目录改为 `public/`，避免将 `.wrangler/state` 本地缓存打包。
-- `fish_doodle_classifier.onnx` 通过 `GET /fish_doodle_classifier.onnx` 由 Worker 转发到 R2，无需改前端。
+- `fish_doodle_classifier.onnx` 经 Worker 302 到 R2 自定义域；前端已改为直连 `r2.duomoyu.life`。
 - 建议设置线上随机密钥：`npx wrangler secret put JWT_SECRET`。
 
 ### 下一步

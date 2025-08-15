@@ -418,10 +418,14 @@ function updateAuthenticationUI() {
     const isLoggedIn = isUserLoggedIn();
     const currentUser = getCurrentUser();
 
-    // Update "my tanks" link visibility
+    // Temporarily hide "my tanks" entry entirely
     const myTanksLink = document.getElementById('my-tanks-link');
     if (myTanksLink) {
-        myTanksLink.style.display = isLoggedIn ? 'inline' : 'none';
+        myTanksLink.style.display = 'none';
+        myTanksLink.setAttribute('aria-hidden', 'true');
+        myTanksLink.setAttribute('tabindex', '-1');
+        myTanksLink.href = 'javascript:void(0)';
+        myTanksLink.onclick = (e) => e.preventDefault();
     }
     // Update auth link (login/logout)
     const authLink = document.getElementById('auth-link');

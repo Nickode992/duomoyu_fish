@@ -135,9 +135,8 @@ function setupTankActions() {
         const editBtn = document.createElement('button');
         editBtn.className = 'btn btn-primary';
         editBtn.textContent = 'Edit Tank';
-        editBtn.onclick = () => {
-            window.location.href = `fishtanks.html`;
-        };
+        // Temporarily disable navigation to fishtanks.html until backend is ready
+        editBtn.style.display = 'none';
         actionsContainer.appendChild(editBtn);
     }
     
