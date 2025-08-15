@@ -140,7 +140,10 @@ async function submitFish(artist, needsModeration = false) {
             // Save today's date to track fish submission
             const today = new Date().toDateString();
             localStorage.setItem('lastFishDate', today);
-            localStorage.setItem('userId', result.data.userId);
+            // Only set anonymous userId when not logged in; avoid overwriting logged-in id on subsequent submissions
+            if (!userToken && result.data.userId) {
+                localStorage.setItem('userId', result.data.userId);
+            }
             
             // Show success message based on moderation status
             if (needsModeration) {

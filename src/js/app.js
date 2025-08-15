@@ -140,7 +140,10 @@ async function submitFish(artist, needsModeration = false) {
             // Save today's date to track fish submission
             const today = new Date().toDateString();
             localStorage.setItem('lastFishDate', today);
-            localStorage.setItem('userId', result.data.userId);
+            // Only set anonymous userId when not logged in; avoid overwriting logged-in id on subsequent submissions
+            if (!userToken && result.data.userId) {
+                localStorage.setItem('userId', result.data.userId);
+            }
             
             // Show success message based on moderation status
             if (needsModeration) {
@@ -857,9 +860,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const lastFishDate = localStorage.getItem('lastFishDate');
     console.log(`Last fish date: ${lastFishDate}, Today: ${today}`);
     if (lastFishDate === today) {
-        showModal(`<div style='text-align:center;'>You already drew a fish today!<br><br>
-            <button id='go-to-tank' style='padding:8px 16px; margin: 0 5px;'>Take me to fishtank</button>
-            <button id='draw-another' style='padding:8px 16px; margin: 0 5px;'>I want to draw another fish</button></div>`, () => { });
+        showModal(`<div style='text-align:center;'>${(window.i18n && i18n.t)? i18n.t('draw.already.title') : 'You already drew a fish today!'}<br><br>
+            <button id='go-to-tank' style='padding:8px 16px; margin: 0 5px;'>${(window.i18n && i18n.t)? i18n.t('draw.already.toTank') : 'Take me to fishtank'}</button>
+            <button id='draw-another' style='padding:8px 16px; margin: 0 5px;'>${(window.i18n && i18n.t)? i18n.t('draw.already.drawAnother') : 'I want to draw another fish'}</button></div>`, () => { });
         
         document.getElementById('go-to-tank').onclick = () => {
             window.location.href = 'tank.html';
