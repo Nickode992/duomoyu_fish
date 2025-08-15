@@ -37,6 +37,14 @@
     - 忘记/重置：生成 30 分钟有效的重置 token，写入 `password_resets` 并通过 Resend 发送邮件；校验 token 后更新密码。
   - 邮件发送：接入 Resend（`RESEND_API_KEY`、`RESEND_FROM`）。
 
+#### Firebase 清理（本次新增）
+- 停用前端 Firebase 依赖：已在所有页面注释掉 `firebase-app.js`/`firebase-firestore.js`/`firebase-auth.js` 与 `src/js/firebase-init.js` 的 `<script>` 引用（含 `public/` 镜像）。
+- 现前端只通过 Worker API 访问数据；`firebase-init.js` 不再被加载。
+
+#### 数据库与配置（本次新增）
+- 已执行 D1 远程迁移：`migrations/0002_auth.sql`（创建 `users`、`password_resets`）。
+- 邮件密钥：已通过 `wrangler secret put RESEND_API_KEY --name duomoyu` 配置；`wrangler.toml` 移除空的 `RESEND_API_KEY` 变量，改用 Secret。
+
 #### 品牌与内容清理（本次新增）
 - 站点品牌统一为 `duomoyu.life`：
   - 将页面内 `drawafish.com` 全量替换为 `duomoyu.life`（`index.html`、`tank.html`、`rank.html`、`profile.html`、`fishtanks.html`，含 `public/` 镜像）。
