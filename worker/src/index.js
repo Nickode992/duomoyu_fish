@@ -20,6 +20,10 @@ export default {
 			}
 			// Serve ONNX model from R2 to avoid asset size limits
 			if (url.pathname === '/fish_doodle_classifier.onnx') {
+				const publicBase = (env && env.R2_PUBLIC_BASE_URL) ? String(env.R2_PUBLIC_BASE_URL).replace(/\/+$/, '') : '';
+				if (publicBase) {
+					return Response.redirect(`${publicBase}/models/fish_doodle_classifier.onnx`, 302);
+				}
 				const proxyReq = new Request(new URL('/r2/models/fish_doodle_classifier.onnx', url.origin), request);
 				return await getR2Object(proxyReq, env);
 			}
@@ -174,7 +178,7 @@ async function uploadFish(request, env) {
 	await env.BUCKET.put(objectKey, arrayBuffer, {
 		httpMetadata: { contentType: 'image/png' },
 	});
-	const publicUrl = publicR2UrlFromRequest(request, objectKey);
+	const publicUrl = publicR2UrlFromRequest(request, objectKey, env);
 
 	// Insert DB row
 	const nowIso = new Date().toISOString();
@@ -200,7 +204,11 @@ async function getR2Object(request, env) {
 	return new Response(obj.body, { headers });
 }
 
-function publicR2UrlFromRequest(request, key) {
+function publicR2UrlFromRequest(request, key, env) {
+	// Prefer public R2 custom domain if configured via env
+	if (env && env.R2_PUBLIC_BASE_URL) {
+		return `${String(env.R2_PUBLIC_BASE_URL).replace(/\/+$/, '')}/${key}`;
+	}
 	const origin = new URL(request.url).origin;
 	return `${origin}/r2/${key}`;
 }
