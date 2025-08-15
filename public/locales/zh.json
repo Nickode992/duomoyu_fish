@@ -1,7 +1,4 @@
 {
-  "common": {
-    "language": "语言"
-  },
   "index": {
     "title": "画一条鱼！",
     "subtitle": "（请朝右）",
@@ -11,6 +8,14 @@
       "rank": "排行",
       "myTanks": "我的鱼缸"
     }
+  },
+  "draw": {
+    "eraser": "橡皮",
+    "size": "粗细：",
+    "undo": "撤销",
+    "clear": "清空",
+    "flip": "水平翻转",
+    "fishProbability": "是鱼的概率"
   },
   "login": {
     "title": "登录",

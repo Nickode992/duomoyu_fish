@@ -272,7 +272,7 @@ function createPaintOptions() {
 
     // Eraser
     const eraserBtn = document.createElement('button');
-    eraserBtn.textContent = 'Eraser';
+    eraserBtn.textContent = (window.i18n && typeof window.i18n.t === 'function') ? window.i18n.t('draw.eraser') : 'Eraser';
     eraserBtn.style.padding = '4px 8px';
     eraserBtn.style.height = '24px';
     eraserBtn.style.fontSize = '12px';
@@ -292,7 +292,7 @@ function createPaintOptions() {
     widthContainer.style.gap = '4px';
     
     const widthLabel = document.createElement('span');
-    widthLabel.textContent = 'Size:';
+    widthLabel.textContent = (window.i18n && typeof window.i18n.t === 'function') ? window.i18n.t('draw.size') : 'Size:';
     widthLabel.style.fontSize = '12px';
     widthContainer.appendChild(widthLabel);
     
@@ -378,7 +378,7 @@ function createUndoButton() {
         let controlsContainer = paintBar.querySelector('div:last-child');
         if (controlsContainer) {
             const undoBtn = document.createElement('button');
-            undoBtn.textContent = 'Undo';
+            undoBtn.textContent = (window.i18n && typeof window.i18n.t === 'function') ? window.i18n.t('draw.undo') : 'Undo';
             undoBtn.style.padding = '4px 8px';
             undoBtn.style.height = '24px';
             undoBtn.style.fontSize = '12px';
@@ -397,7 +397,7 @@ function createClearButton() {
         let controlsContainer = paintBar.querySelector('div:last-child');
         if (controlsContainer) {
             const clearBtn = document.createElement('button');
-            clearBtn.textContent = 'Clear';
+            clearBtn.textContent = (window.i18n && typeof window.i18n.t === 'function') ? window.i18n.t('draw.clear') : 'Clear';
             clearBtn.style.padding = '4px 8px';
             clearBtn.style.height = '24px';
             clearBtn.style.fontSize = '12px';
@@ -416,7 +416,7 @@ function createFlipButton() {
         let controlsContainer = paintBar.querySelector('div:last-child');
         if (controlsContainer) {
             const flipBtn = document.createElement('button');
-            flipBtn.textContent = 'Flip';
+            flipBtn.textContent = (window.i18n && typeof window.i18n.t === 'function') ? window.i18n.t('draw.flip') : 'Flip';
             flipBtn.style.padding = '4px 8px';
             flipBtn.style.height = '24px';
             flipBtn.style.fontSize = '12px';
@@ -659,7 +659,11 @@ async function verifyFishDoodle(canvas) {
             if (drawUI) drawUI.appendChild(probDiv);
         }
     }
-    probDiv.textContent = `Fish probability: ${(fishProbability * 100).toFixed(1)}%`;
+    if (window.i18n && typeof window.i18n.t === 'function') {
+        probDiv.textContent = `${window.i18n.t('draw.fishProbability')}: ${(fishProbability * 100).toFixed(1)}%`;
+    } else {
+        probDiv.textContent = `Fish probability: ${(fishProbability * 100).toFixed(1)}%`;
+    }
     probDiv.style.color = isFish ? '#218838' : '#c0392b';
     return isFish;
 }

@@ -1,7 +1,4 @@
 {
-  "common": {
-    "language": "Language"
-  },
   "index": {
     "title": "Draw a Fish!",
     "subtitle": "(facing right please)",
@@ -11,6 +8,14 @@
       "rank": "rank",
       "myTanks": "my tanks"
     }
+  },
+  "draw": {
+    "eraser": "Eraser",
+    "size": "Size:",
+    "undo": "Undo",
+    "clear": "Clear",
+    "flip": "Flip",
+    "fishProbability": "Fish probability"
   },
   "login": {
     "title": "Fish Login",

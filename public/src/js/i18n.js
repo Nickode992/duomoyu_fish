@@ -89,27 +89,16 @@
     }
 
     function createLanguageSwitcher() {
-        const container = document.createElement('span');
-        container.style.cssText = 'margin-left:8px;';
-        const label = document.createElement('label');
-        try {
-            // Use translated label if available
-            label.textContent = (resolveKey('common.language') || 'Language') + ':';
-        } catch (e) {
-            label.textContent = 'Language:';
-        }
-        label.style.cssText = 'margin-right:4px; font-size:12px; color:#666;';
-        const select = document.createElement('select');
-        select.style.cssText = 'font-size:12px; padding:2px;';
-        const optEn = document.createElement('option'); optEn.value = 'en'; optEn.textContent = 'EN';
-        const optZh = document.createElement('option'); optZh.value = 'zh'; optZh.textContent = '中文';
-        select.appendChild(optEn);
-        select.appendChild(optZh);
-        select.value = currentLang || getInitialLang();
-        select.addEventListener('change', async function() { await setLanguage(this.value); });
-        container.appendChild(label);
-        container.appendChild(select);
-        return container;
+        const button = document.createElement('button');
+        button.style.cssText = 'font-size:12px; padding:2px 6px; border:1px solid #999; background:#f5f5f5; cursor:pointer; border-radius:3px;';
+        const refreshText = () => { button.textContent = (currentLang === 'zh') ? 'EN' : '中文'; };
+        refreshText();
+        button.addEventListener('click', async function() {
+            const next = (currentLang === 'zh') ? 'en' : 'zh';
+            await setLanguage(next);
+            refreshText();
+        });
+        return button;
     }
 
     async function init() {
@@ -121,6 +110,7 @@
 
     window.i18n = {
         get lang() { return currentLang; },
+        t: (key) => resolveKey(key),
         setLanguage,
         applyTranslations,
         translateElement,
