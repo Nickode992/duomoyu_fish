@@ -272,7 +272,8 @@ function createPaintOptions() {
 
     // Eraser
     const eraserBtn = document.createElement('button');
-    eraserBtn.textContent = (window.i18n && typeof window.i18n.t === 'function') ? window.i18n.t('draw.eraser') : 'Eraser';
+    eraserBtn.setAttribute('data-i18n', 'draw.eraser');
+    eraserBtn.textContent = 'Eraser';
     eraserBtn.style.padding = '4px 8px';
     eraserBtn.style.height = '24px';
     eraserBtn.style.fontSize = '12px';
@@ -292,7 +293,8 @@ function createPaintOptions() {
     widthContainer.style.gap = '4px';
     
     const widthLabel = document.createElement('span');
-    widthLabel.textContent = (window.i18n && typeof window.i18n.t === 'function') ? window.i18n.t('draw.size') : 'Size:';
+    widthLabel.setAttribute('data-i18n', 'draw.size');
+    widthLabel.textContent = 'Size:';
     widthLabel.style.fontSize = '12px';
     widthContainer.appendChild(widthLabel);
     
@@ -309,6 +311,11 @@ function createPaintOptions() {
     controlsContainer.appendChild(widthContainer);
     
     paintBar.appendChild(controlsContainer);
+
+    // Apply i18n to newly created controls
+    if (window.i18n && typeof window.i18n.applyTranslations === 'function') {
+        window.i18n.applyTranslations(paintBar);
+    }
 }
 createPaintOptions();
 
@@ -378,7 +385,8 @@ function createUndoButton() {
         let controlsContainer = paintBar.querySelector('div:last-child');
         if (controlsContainer) {
             const undoBtn = document.createElement('button');
-            undoBtn.textContent = (window.i18n && typeof window.i18n.t === 'function') ? window.i18n.t('draw.undo') : 'Undo';
+            undoBtn.setAttribute('data-i18n', 'draw.undo');
+            undoBtn.textContent = 'Undo';
             undoBtn.style.padding = '4px 8px';
             undoBtn.style.height = '24px';
             undoBtn.style.fontSize = '12px';
@@ -386,6 +394,9 @@ function createUndoButton() {
             undoBtn.style.cursor = 'pointer';
             undoBtn.onclick = undo;
             controlsContainer.appendChild(undoBtn);
+            if (window.i18n && typeof window.i18n.applyTranslations === 'function') {
+                window.i18n.applyTranslations(controlsContainer);
+            }
         }
     }
 }
@@ -397,7 +408,8 @@ function createClearButton() {
         let controlsContainer = paintBar.querySelector('div:last-child');
         if (controlsContainer) {
             const clearBtn = document.createElement('button');
-            clearBtn.textContent = (window.i18n && typeof window.i18n.t === 'function') ? window.i18n.t('draw.clear') : 'Clear';
+            clearBtn.setAttribute('data-i18n', 'draw.clear');
+            clearBtn.textContent = 'Clear';
             clearBtn.style.padding = '4px 8px';
             clearBtn.style.height = '24px';
             clearBtn.style.fontSize = '12px';
@@ -405,6 +417,9 @@ function createClearButton() {
             clearBtn.style.cursor = 'pointer';
             clearBtn.onclick = clearCanvas;
             controlsContainer.appendChild(clearBtn);
+            if (window.i18n && typeof window.i18n.applyTranslations === 'function') {
+                window.i18n.applyTranslations(controlsContainer);
+            }
         }
     }
 }
@@ -416,7 +431,8 @@ function createFlipButton() {
         let controlsContainer = paintBar.querySelector('div:last-child');
         if (controlsContainer) {
             const flipBtn = document.createElement('button');
-            flipBtn.textContent = (window.i18n && typeof window.i18n.t === 'function') ? window.i18n.t('draw.flip') : 'Flip';
+            flipBtn.setAttribute('data-i18n', 'draw.flip');
+            flipBtn.textContent = 'Flip';
             flipBtn.style.padding = '4px 8px';
             flipBtn.style.height = '24px';
             flipBtn.style.fontSize = '12px';
@@ -424,6 +440,9 @@ function createFlipButton() {
             flipBtn.style.cursor = 'pointer';
             flipBtn.onclick = flipCanvas;
             controlsContainer.appendChild(flipBtn);
+            if (window.i18n && typeof window.i18n.applyTranslations === 'function') {
+                window.i18n.applyTranslations(controlsContainer);
+            }
         }
     }
 }
