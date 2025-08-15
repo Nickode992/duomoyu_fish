@@ -134,7 +134,7 @@ async function submitFish(artist, needsModeration = false) {
         // Remove spinner and re-enable button
         if (submitBtn) {
             submitBtn.disabled = false;
-            submitBtn.textContent = 'Submit';
+            submitBtn.textContent = (window.i18n && i18n.t) ? i18n.t('draw.modal.btn.submit') : 'Submit';
         }
         if (result && result.data && result.data.Image) {
             // Save today's date to track fish submission
@@ -145,22 +145,22 @@ async function submitFish(artist, needsModeration = false) {
             // Show success message based on moderation status
             if (needsModeration) {
                 showModal(`<div style='text-align:center;'>
-                    <h1>Fish Submitted for Review</div>
-                    <div>Your fish has been submitted and will appear in the tank once it passes moderator review.</div>
-                    <button onclick="window.location.href='tank.html'">View Tank</button>
+                    <h1>${(window.i18n && i18n.t)? i18n.t('draw.upload.reviewTitle') : 'Fish Submitted for Review'}</h1>
+                    <div>${(window.i18n && i18n.t)? i18n.t('draw.upload.reviewBody') : 'Your fish has been submitted and will appear in the tank once it passes moderator review.'}</div>
+                    <button onclick="window.location.href='tank.html'">${(window.i18n && i18n.t)? i18n.t('draw.upload.viewTank') : 'View Tank'}</button>
                 </div>`, () => {});
             } else {
                 // Regular fish - go directly to tank
                 window.location.href = 'tank.html';
             }
         } else {
-            alert('Sorry, there was a problem uploading your fish. Please try again.');
+            alert((window.i18n && i18n.t)? i18n.t('draw.upload.errorGeneric') : 'Sorry, there was a problem uploading your fish. Please try again.');
         }
     } catch (err) {
-        alert('Failed to submit fish: ' + err.message);
+        alert(((window.i18n && i18n.t)? i18n.t('draw.upload.errorPrefix') : 'Failed to submit fish: ') + err.message);
         if (submitBtn) {
             submitBtn.disabled = false;
-            submitBtn.textContent = 'Submit';
+            submitBtn.textContent = (window.i18n && i18n.t) ? i18n.t('draw.modal.btn.submit') : 'Submit';
         }
     }
 }
@@ -179,19 +179,19 @@ swimBtn.addEventListener('click', async () => {
     if (!isFish) {
         // Show moderation warning modal for low-scoring fish
         showModal(`<div style='text-align:center;'>
-            <div style='color:#ff6b35;font-weight:bold;margin-bottom:12px;'>Low Fish Score</div>
-            <div style='margin-bottom:16px;line-height:1.4;'>i dont think this is a fish but you can submit it anyway and ill review it</div>
-            <div style='margin-bottom:16px;'>Sign your art:<br><input id='artist-name' value='${escapeHtml(defaultName)}' style='margin:10px 0 16px 0;padding:6px;width:80%;max-width:180px;'></div>
-            <button id='submit-fish' >Submit for Review</button>
-            <button id='cancel-fish' >Cancel</button>
+            <div style='color:#ff6b35;font-weight:bold;margin-bottom:12px;'>${(window.i18n && i18n.t)? i18n.t('draw.modal.low.title') : 'Low Fish Score'}</div>
+            <div style='margin-bottom:16px;line-height:1.4;'>${(window.i18n && i18n.t)? i18n.t('draw.modal.low.body') : 'i dont think this is a fish but you can submit it anyway and ill review it'}</div>
+            <div style='margin-bottom:16px;'>${(window.i18n && i18n.t)? i18n.t('draw.modal.sign') : 'Sign your art:'}<br><input id='artist-name' value='${escapeHtml(defaultName)}' style='margin:10px 0 16px 0;padding:6px;width:80%;max-width:180px;'></div>
+            <button id='submit-fish' >${(window.i18n && i18n.t)? i18n.t('draw.modal.btn.submitForReview') : 'Submit for Review'}</button>
+            <button id='cancel-fish' >${(window.i18n && i18n.t)? i18n.t('draw.modal.btn.cancel') : 'Cancel'}</button>
         </div>`, () => { });
     } else {
         // Show normal submission modal for good fish
         showModal(`<div style='text-align:center;'>
-            <div style='color:#27ae60;font-weight:bold;margin-bottom:12px;'>Great Fish!</div>
-            <div style='margin-bottom:16px;'>Sign your art:<br><input id='artist-name' value='${escapeHtml(defaultName)}' style='margin:10px 0 16px 0;padding:6px;width:80%;max-width:180px;'></div>
-            <button id='submit-fish' style='padding:6px 18px;background:#27ae60;color:white;border:none;border-radius:4px;'>Submit</button>
-            <button id='cancel-fish' style='padding:6px 18px;margin-left:10px;background:#ccc;border:none;border-radius:4px;'>Cancel</button>
+            <div style='color:#27ae60;font-weight:bold;margin-bottom:12px;'>${(window.i18n && i18n.t)? i18n.t('draw.modal.good.title') : 'Great Fish!'}</div>
+            <div style='margin-bottom:16px;'>${(window.i18n && i18n.t)? i18n.t('draw.modal.sign') : 'Sign your art:'}<br><input id='artist-name' value='${escapeHtml(defaultName)}' style='margin:10px 0 16px 0;padding:6px;width:80%;max-width:180px;'></div>
+            <button id='submit-fish' style='padding:6px 18px;background:#27ae60;color:white;border:none;border-radius:4px;'>${(window.i18n && i18n.t)? i18n.t('draw.modal.btn.submit') : 'Submit'}</button>
+            <button id='cancel-fish' style='padding:6px 18px;margin-left:10px;background:#ccc;border:none;border-radius:4px;'>${(window.i18n && i18n.t)? i18n.t('draw.modal.btn.cancel') : 'Cancel'}</button>
         </div>`, () => { });
     }
     
@@ -792,9 +792,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const lastFishDate = localStorage.getItem('lastFishDate');
     console.log(`Last fish date: ${lastFishDate}, Today: ${today}`);
     if (lastFishDate === today) {
-        showModal(`<div style='text-align:center;'>You already drew a fish today!<br><br>
-            <button id='go-to-tank' style='padding:8px 16px; margin: 0 5px;'>Take me to fishtank</button>
-            <button id='draw-another' style='padding:8px 16px; margin: 0 5px;'>I want to draw another fish</button></div>`, () => { });
+        showModal(`<div style='text-align:center;'>${(window.i18n && i18n.t)? i18n.t('draw.already.title') : 'You already drew a fish today!'}<br><br>
+            <button id='go-to-tank' style='padding:8px 16px; margin: 0 5px;'>${(window.i18n && i18n.t)? i18n.t('draw.already.toTank') : 'Take me to fishtank'}</button>
+            <button id='draw-another' style='padding:8px 16px; margin: 0 5px;'>${(window.i18n && i18n.t)? i18n.t('draw.already.drawAnother') : 'I want to draw another fish'}</button></div>`, () => { });
         
         document.getElementById('go-to-tank').onclick = () => {
             window.location.href = 'tank.html';

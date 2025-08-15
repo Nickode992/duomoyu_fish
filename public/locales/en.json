@@ -15,7 +15,34 @@
     "undo": "Undo",
     "clear": "Clear",
     "flip": "Flip",
-    "fishProbability": "Fish probability"
+    "fishProbability": "Fish probability",
+    "modal": {
+      "low": {
+        "title": "Low Fish Score",
+        "body": "i dont think this is a fish but you can submit it anyway and ill review it"
+      },
+      "good": {
+        "title": "Great Fish!"
+      },
+      "sign": "Sign your art:",
+      "btn": {
+        "submitForReview": "Submit for Review",
+        "submit": "Submit",
+        "cancel": "Cancel"
+      }
+    },
+    "already": {
+      "title": "You already drew a fish today!",
+      "toTank": "Take me to fishtank",
+      "drawAnother": "I want to draw another fish"
+    },
+    "upload": {
+      "reviewTitle": "Fish Submitted for Review",
+      "reviewBody": "Your fish has been submitted and will appear in the tank once it passes moderator review.",
+      "viewTank": "View Tank",
+      "errorGeneric": "Sorry, there was a problem uploading your fish. Please try again.",
+      "errorPrefix": "Failed to submit fish: "
+    }
   },
   "login": {
     "title": "Fish Login",

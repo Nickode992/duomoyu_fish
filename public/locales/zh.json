@@ -15,7 +15,34 @@
     "undo": "撤销",
     "clear": "清空",
     "flip": "水平翻转",
-    "fishProbability": "是鱼的概率"
+    "fishProbability": "是鱼的概率",
+    "modal": {
+      "low": {
+        "title": "鱼像分较低",
+        "body": "看起来不像鱼，不过你仍然可以提交，我会人工审核"
+      },
+      "good": {
+        "title": "很棒的鱼！"
+      },
+      "sign": "给你的作品署名：",
+      "btn": {
+        "submitForReview": "提交审核",
+        "submit": "提交",
+        "cancel": "取消"
+      }
+    },
+    "already": {
+      "title": "你今天已经画过一条鱼啦！",
+      "toTank": "带我去鱼缸",
+      "drawAnother": "我还想再画一条"
+    },
+    "upload": {
+      "reviewTitle": "已提交审核",
+      "reviewBody": "你的鱼已提交，审核通过后会出现在鱼缸里。",
+      "viewTank": "查看鱼缸",
+      "errorGeneric": "抱歉，上传出现问题，请重试。",
+      "errorPrefix": "提交失败："
+    }
   },
   "login": {
     "title": "登录",
