@@ -15,7 +15,7 @@
   2) Worker 读取 `formData`，写入 R2 `fish/{uuid}.png`，构造同域可读 URL `/r2/fish/{uuid}.png`；
   3) Worker 记录元数据到 D1（`fish` 表）并返回 JSON（`{success:true, data: {id, userId, artist, Image}}`）。
 - **模型文件（ONNX）**：
-  - 模型存放于 R2 `models/`；`GET /fish_doodle_classifier.onnx` 在 Worker 中 302 重定向到 R2 自定义域（`https://r2.duomoyu.life/models/fish_doodle_classifier.onnx`）；前端也直接从该自定义域加载模型。
+  - 模型存放于 R2 `models/`；`GET /fish_doodle_classifier.onnx` 由 Worker 内部代理至 R2（非 302），统一同源返回并附带 CORS 头；前端从同源路径 `/fish_doodle_classifier.onnx` 加载模型。
 - **错误处理**：
   - Worker 顶层 try/catch，API 抛错统一 `application/json`；已修复此前错误落到 HTML 导致前端 JSON 解析失败的问题。
 
@@ -46,6 +46,12 @@
 - 邮件密钥：已通过 `wrangler secret put RESEND_API_KEY --name duomoyu` 配置；`wrangler.toml` 移除空的 `RESEND_API_KEY` 变量，改用 Secret。
 
 #### 品牌与内容清理（本次新增）
+#### 首页体验（本次新增）
+- 首页增加 ONNX/wasm 加载进度条与多语言提示：
+  - 文案键：`index.teaching`（如“正在传授浏览器鱼类识别技巧…”）与 `index.loading`
+  - 实现：拦截对 `.onnx`、`.wasm`、`onnxruntime-web/` 的 `fetch`，汇总响应 `content-length` 与流式读取字节，渲染顶部进度条；未知大小时采用“呼吸条”。
+  - 入口文件：`public/src/js/app.js` 与 `src/js/app.js`
+
 - 站点品牌统一为 `duomoyu.life`：
   - 将页面内 `drawafish.com` 全量替换为 `duomoyu.life`（`index.html`、`tank.html`、`rank.html`、`profile.html`、`fishtanks.html`，含 `public/` 镜像）。
   - 更新 Open Graph/Twitter 标签与 `link rel=canonical` 指向 `https://duomoyu.life`。
@@ -58,7 +64,7 @@
 
 ### 路由一览（当前）
 - 静态：`/*`（Assets）
-- 模型：`GET /fish_doodle_classifier.onnx` → 302 到 `https://r2.duomoyu.life/models/fish_doodle_classifier.onnx`
+- 模型：`GET /fish_doodle_classifier.onnx` → Worker 代理 R2 `models/fish_doodle_classifier.onnx`（附 `Access-Control-Allow-Origin: *`）
 - 图片直链/代理：
   - 直链优先：Worker 生成的公共图片 URL 优先指向 `https://r2.duomoyu.life/fish/{uuid}.png`
   - 代理保留：`GET /r2/*` 仍可读取 R2（用于回退或本地预览）
@@ -101,9 +107,9 @@
   - `R2_PUBLIC_BASE_URL = "https://r2.duomoyu.life"`（供 Worker 生成直链）
 - Worker：
   - 生成公共图片 URL 时优先使用 `env.R2_PUBLIC_BASE_URL`
-  - `/fish_doodle_classifier.onnx` 直接 302 到自定义域
+  - `/fish_doodle_classifier.onnx` 走同源代理（不再重定向），并在 `getR2Object` 里统一加 CORS 头
 - 前端：
-  - `public/src/js/app.js` 与 `src/js/app.js` 中 ONNX 模型加载源改为 `https://r2.duomoyu.life/models/fish_doodle_classifier.onnx`
+  - `public/src/js/app.js` 与 `src/js/app.js` 中 ONNX 模型加载源改为同源 `/fish_doodle_classifier.onnx`
 - 建议：在 `r2.duomoyu.life` 上配置 CORS 头（`Access-Control-Allow-Origin: *` 等），以支持 `<img crossOrigin>` 与 Canvas。
 
 ### 主要命令（记录）
@@ -121,7 +127,7 @@ npx wrangler deploy
 
 ### 注意事项
 - 资产目录改为 `public/`，避免将 `.wrangler/state` 本地缓存打包。
-- `fish_doodle_classifier.onnx` 经 Worker 302 到 R2 自定义域；前端已改为直连 `r2.duomoyu.life`。
+- 模型同源加载：`fish_doodle_classifier.onnx` 统一走 Worker 代理返回；不再 302 到 R2 自定义域。
 - 建议设置线上随机密钥：`npx wrangler secret put JWT_SECRET`。
 
 ### 下一步
