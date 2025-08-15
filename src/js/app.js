@@ -508,6 +508,110 @@ function makeDisplayFishCanvas(img, width = 80, height = 48) {
     return displayCanvas;
 }
 
+// Lightweight loading UI for ONNX model & WASM (dev copy)
+let __modelLoadingState = { started: false, totalBytes: 0, loadedBytes: 0, unknownTotal: false };
+
+function showModelLoader() {
+    if (__modelLoadingState.started) return;
+    __modelLoadingState.started = true;
+    let box = document.getElementById('model-loader');
+    if (!box) {
+        box = document.createElement('div');
+        box.id = 'model-loader';
+        box.style.position = 'fixed';
+        box.style.left = '50%';
+        box.style.top = '10px';
+        box.style.transform = 'translateX(-50%)';
+        box.style.background = '#fff';
+        box.style.border = '1px solid #999';
+        box.style.borderRadius = '6px';
+        box.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+        box.style.padding = '10px 14px';
+        box.style.zIndex = '10000';
+        box.style.minWidth = '260px';
+        box.innerHTML = `
+            <div id="model-loader-text" style="font-size:12px;margin-bottom:6px;">
+                ${(window.i18n && i18n.t) ? i18n.t('index.teaching') : 'Teaching your browser fish recognition tricks...'}
+            </div>
+            <div style="width:100%;height:8px;background:#eee;border-radius:4px;overflow:hidden;">
+                <div id="model-loader-bar" style="width:0%;height:100%;background:#27ae60;transition:width .2s;"></div>
+            </div>
+        `;
+        document.body.appendChild(box);
+    } else {
+        box.style.display = 'block';
+    }
+}
+
+function updateModelLoader() {
+    const bar = document.getElementById('model-loader-bar');
+    const text = document.getElementById('model-loader-text');
+    if (!bar || !text) return;
+    if (__modelLoadingState.unknownTotal || !__modelLoadingState.totalBytes) {
+        bar.style.transition = 'none';
+        const t = Date.now() / 400;
+        const p = (Math.sin(t) * 0.4 + 0.5) * 100;
+        bar.style.width = p.toFixed(0) + '%';
+        text.textContent = (window.i18n && i18n.t) ? i18n.t('index.teaching') : 'Teaching your browser fish recognition tricks...';
+        return;
+    }
+    const pct = Math.max(0, Math.min(100, (__modelLoadingState.loadedBytes / __modelLoadingState.totalBytes) * 100));
+    bar.style.transition = 'width .2s';
+    bar.style.width = pct.toFixed(0) + '%';
+    const base = (window.i18n && i18n.t) ? i18n.t('index.teaching') : 'Teaching your browser fish recognition tricks...';
+    text.textContent = `${base} ${pct.toFixed(0)}%`;
+}
+
+function finishModelLoader() {
+    const box = document.getElementById('model-loader');
+    if (!box) return;
+    box.style.transition = 'opacity .35s, transform .35s';
+    box.style.opacity = '0';
+    box.style.transform = 'translateX(-50%) translateY(-6px)';
+    setTimeout(() => { box.style.display = 'none'; }, 400);
+}
+
+if (!window.__fetchPatchedForModel__) {
+    window.__fetchPatchedForModel__ = true;
+    const originalFetch = window.fetch.bind(window);
+    window.fetch = async function(input, init) {
+        const url = (typeof input === 'string') ? input : (input && input.url ? input.url : '');
+        const isTracked = /fish_doodle_classifier\.onnx|\.wasm(\?|$)|onnxruntime-web\//.test(url);
+        if (!isTracked) {
+            return originalFetch(input, init);
+        }
+        showModelLoader();
+        try {
+            const resp = await originalFetch(input, init);
+            const clone = resp.clone();
+            const len = parseInt(clone.headers.get('content-length') || '0', 10);
+            if (!isNaN(len) && len > 0) {
+                __modelLoadingState.totalBytes += len;
+            } else {
+                __modelLoadingState.unknownTotal = true;
+            }
+            updateModelLoader();
+            if (clone.body && clone.body.getReader) {
+                const reader = clone.body.getReader();
+                while (true) {
+                    const { done, value } = await reader.read();
+                    if (done) break;
+                    if (value && value.byteLength) {
+                        __modelLoadingState.loadedBytes += value.byteLength;
+                        updateModelLoader();
+                    }
+                }
+            }
+            if (/fish_doodle_classifier\.onnx/.test(url)) {
+                setTimeout(() => finishModelLoader(), 600);
+            }
+            return resp;
+        } catch (e) {
+            return originalFetch(input, init);
+        }
+    };
+}
+
 // ONNX fish doodle classifier integration
 let ortSession = null;
 let lastFishCheck = true;

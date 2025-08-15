@@ -7,7 +7,9 @@
       "swim": "让它游起来！",
       "rank": "排行",
       "myTanks": "我的鱼缸"
-    }
+    },
+    "teaching": "正在传授浏览器鱼类识别技巧…",
+    "loading": "加载中…"
   },
   "draw": {
     "eraser": "橡皮",
