@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fish Login</title>
+    <title data-i18n="login.title">Fish Login</title>
     <link rel="stylesheet" href="src/css/style.css">
+    <link rel="icon" href="favicon.ico">
 
     
 
@@ -137,41 +138,41 @@
 <body>
     <div class="login-container">
         <div class="login-header">
-            Fish Login
+            <span data-i18n="login.title">Fish Login</span>
         </div>
 
         <div class="auth-tabs">
-            <button type="button" class="auth-tab-btn active" onclick="showAuthForm('signin')">Sign In</button>
-            <button type="button" class="auth-tab-btn" onclick="showAuthForm('signup')">Sign Up</button>
+            <button type="button" class="auth-tab-btn active" onclick="showAuthForm('signin')" data-i18n="login.tabs.signin">Sign In</button>
+            <button type="button" class="auth-tab-btn" onclick="showAuthForm('signup')" data-i18n="login.tabs.signup">Sign Up</button>
         </div>
 
         <!-- Sign In Form -->
         <form id="signin-form" class="auth-form">
-            <strong>Email:</strong><br>
+            <strong data-i18n="login.email">Email:</strong><br>
             <input type="email" id="signin-email" required><br>
-            <strong>Password:</strong><br>
+            <strong data-i18n="login.password">Password:</strong><br>
             <input type="password" id="signin-password" required><br><br>
-            <button type="submit">Login</button>
+            <button type="submit" data-i18n="login.login">Login</button>
             <br><br>
-            <a href="#" id="forgot-password-link" onclick="showForgotPasswordForm()">Forgot Password?</a>
+            <a href="#" id="forgot-password-link" onclick="showForgotPasswordForm()" data-i18n="login.forgot">Forgot Password?</a>
         </form>
 
         <!-- Sign Up Form -->
         <form id="signup-form" class="auth-form" style="display: none;">
-            <strong>Email:</strong><br>
+            <strong data-i18n="login.email">Email:</strong><br>
             <input type="email" id="signup-email" required><br>
-            <strong>Password:</strong><br>
+            <strong data-i18n="login.password">Password:</strong><br>
             <input type="password" id="signup-password" required><br><br>
-            <button type="submit">Register</button> 
+            <button type="submit" data-i18n="login.register">Register</button> 
         </form>
 
         <!-- Forgot Password Form -->
         <form id="forgot-password-form" class="auth-form" style="display: none;">
-            <strong>Enter your email address:</strong><br>
+            <strong data-i18n="login.forgotTitle">Enter your email address:</strong><br>
             <input type="email" id="forgot-email" required><br><br>
-            <button type="submit">Send Reset Email</button>
+            <button type="submit" data-i18n="login.sendReset">Send Reset Email</button>
             <br><br>
-            <a href="#" onclick="showAuthForm('signin')">Back to Sign In</a>
+            <a href="#" onclick="showAuthForm('signin')" data-i18n="login.backToSignin">Back to Sign In</a>
         </form>
 
         
@@ -190,18 +191,19 @@
 
         <!-- Already logged in section -->
         <div id="already-logged-in" class="auth-form" style="display: none; text-align: center;">
-            <h3>You are already logged in!</h3>
+            <h3 data-i18n="login.already.header">You are already logged in!</h3>
             <p id="logged-in-user-info"></p>
-            <button type="button" class="btn" onclick="goToTanks()">Go to My Tanks</button>
+            <button type="button" class="btn" onclick="goToTanks()" data-i18n="login.already.goToTanks">Go to My Tanks</button>
             <br><br>
-            <button type="button" class="btn" onclick="logoutAndStay()" style="background: #dc3545; border-color: #dc3545;">Logout</button>
+            <button type="button" class="btn" onclick="logoutAndStay()" style="background: #dc3545; border-color: #dc3545;" data-i18n="login.already.logout">Logout</button>
         </div>
     </div>
 
     <div class="home-btn-container">
-        <a href="index.html" class="home-btn">Back To Draw</a>
+        <a href="index.html" class="home-btn" data-i18n="login.backToDraw">Back To Draw</a>
     </div>
 
+    <script src="src/js/i18n.js"></script>
     <script src="src/js/footer-utils.js"></script>
     <script src="src/js/fish-utils.js"></script>
     <script src="src/js/firebase-init.js"></script>

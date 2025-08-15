@@ -27,7 +27,7 @@
     <link rel="canonical" href="https://duomoyu.life">
     
     <link rel="stylesheet" href="src/css/style.css">
-    <link rel="icon" href="public/favicon.ico">
+    <link rel="icon" href="favicon.ico">
     
     
     
@@ -110,20 +110,21 @@
       </div>
       
       <section id="drawing-section">
-        <h1>Draw a Fish!</h1>
-        <h2>(facing right please)</h2>
+        <h1 data-i18n="index.title">Draw a Fish!</h1>
+        <h2 data-i18n="index.subtitle">(facing right please)</h2>
         <canvas id="draw-canvas" width="400" height="240" aria-label="Fish drawing canvas for creating digital fish art"></canvas>
         <br><br>
         
         <nav role="navigation" aria-label="Action buttons">
-          <a href="tank.html" title="View Community Fish Tank">tank</a>
-          <button id="swim-btn" title="Make your fish swim in the tank">make it swim!</button>
-          <a href="rank.html" title="Vote on fish drawings">rank</a>
-          <a href="fishtanks.html" id="my-tanks-link" title="Create custom fish tanks">my tanks</a>
+          <a href="tank.html" title="View Community Fish Tank" data-i18n="index.nav.tank">tank</a>
+          <button id="swim-btn" title="Make your fish swim in the tank" data-i18n="index.nav.swim">make it swim!</button>
+          <a href="rank.html" title="Vote on fish drawings" data-i18n="index.nav.rank">rank</a>
+          <a href="fishtanks.html" id="my-tanks-link" title="Create custom fish tanks" data-i18n="index.nav.myTanks">my tanks</a>
         </nav>
       </section>
     </div>
   </main>
+  <script src="src/js/i18n.js"></script>
   <script src="src/js/footer-utils.js"></script>
   <!-- Firebase disabled
   <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>

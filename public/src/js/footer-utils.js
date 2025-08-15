@@ -69,6 +69,20 @@ function insertFooter(special = false) {
     } else {
         document.body.appendChild(footer);
     }
+
+    // Attach i18n language switcher if available
+    try {
+        if (window.i18n && typeof window.i18n.createLanguageSwitcher === 'function') {
+            const switcher = window.i18n.createLanguageSwitcher();
+            const sep = document.createElement('span');
+            sep.textContent = ' | ';
+            sep.style.margin = '0 6px';
+            footer.appendChild(sep);
+            footer.appendChild(switcher);
+        }
+    } catch (e) {
+        // no-op
+    }
     
     // Debug log to verify insertion
 }

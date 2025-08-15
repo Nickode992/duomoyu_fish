@@ -1,0 +1,124 @@
+{
+  "index": {
+    "title": "Draw a Fish!",
+    "subtitle": "(facing right please)",
+    "nav": {
+      "tank": "tank",
+      "swim": "make it swim!",
+      "rank": "rank",
+      "myTanks": "my tanks"
+    }
+  },
+  "draw": {
+    "eraser": "Eraser",
+    "size": "Size:",
+    "undo": "Undo",
+    "clear": "Clear",
+    "flip": "Flip",
+    "fishProbability": "Fish probability",
+    "modal": {
+      "low": {
+        "title": "Low Fish Score",
+        "body": "i dont think this is a fish but you can submit it anyway and ill review it"
+      },
+      "good": {
+        "title": "Great Fish!"
+      },
+      "sign": "Sign your art:",
+      "btn": {
+        "submitForReview": "Submit for Review",
+        "submit": "Submit",
+        "cancel": "Cancel"
+      }
+    },
+    "already": {
+      "title": "You already drew a fish today!",
+      "toTank": "Take me to fishtank",
+      "drawAnother": "I want to draw another fish"
+    },
+    "upload": {
+      "reviewTitle": "Fish Submitted for Review",
+      "reviewBody": "Your fish has been submitted and will appear in the tank once it passes moderator review.",
+      "viewTank": "View Tank",
+      "errorGeneric": "Sorry, there was a problem uploading your fish. Please try again.",
+      "errorPrefix": "Failed to submit fish: "
+    }
+  },
+  "login": {
+    "title": "Fish Login",
+    "tabs": {
+      "signin": "Sign In",
+      "signup": "Sign Up"
+    },
+    "email": "Email:",
+    "password": "Password:",
+    "login": "Login",
+    "register": "Register",
+    "forgot": "Forgot Password?",
+    "forgotTitle": "Enter your email address:",
+    "sendReset": "Send Reset Email",
+    "backToSignin": "Back to Sign In",
+    "already": {
+      "header": "You are already logged in!",
+      "goToTanks": "Go to My Tanks",
+      "logout": "Logout"
+    },
+    "backToDraw": "Back To Draw"
+  }
+  ,
+  "nav": {
+    "title": "Navigation:",
+    "draw": "draw",
+    "tank": "tank",
+    "rankings": "rankings",
+    "profile": "profile",
+    "myTanks": "my tanks",
+    "login": "login"
+  },
+  "tank": {
+    "view": "View:",
+    "sort": { "recent": "Most Recent", "popular": "Most Popular", "random": "Random" },
+    "refresh": "refresh",
+    "notifications": "notifications",
+    "rankings": "rankings",
+    "profile": "profile",
+    "myTanks": "my tanks",
+    "fishCount": "Fish count:",
+    "feed": { "title": "Feed the fish:", "desktop": "Hold Shift + Click or Right-click", "mobile": "Double-tap or Long-press", "tail": "to drop food pellets" },
+    "loading": "loading..."
+  },
+  "fishtankView": {
+    "loading": "Loading tank...",
+    "stats": { "fish": "Fish:", "views": "Views:", "created": "Created:", "privacy": "Privacy:" },
+    "fishSection": { "title": "Fish in this tank", "loading": "Loading fish...", "empty": "This tank is empty. Add some fish to bring it to life!" },
+    "addFish": { "title": "Add Fish to Tank", "loading": "Loading available fish...", "empty": "No fish are available to add to your tank right now.", "draw": "Draw Fish" }
+  },
+  "fishtanks": {
+    "title": "My Fish Tanks",
+    "authRequired": "Please log in to manage your fish tanks",
+    "tabs": { "my": "My Tanks", "create": "Create Tank", "discover": "Discover" },
+    "search": { "placeholder": "Search tanks by name or description..." },
+    "filter": { "all": "All Tanks", "public": "Public Only", "private": "Private Only" },
+    "sort": { "updated": "Recently Updated", "created": "Recently Created", "name": "Name (A-Z)", "fish": "Most Fish", "views": "Most Views" },
+    "loading": { "my": "Loading your tanks...", "public": "Loading public tanks..." },
+    "empty": { "title": "No tanks found!", "desc": "Create your first fish tank to get started.", "cta": "Create First Tank" },
+    "create": { "title": "Create New Tank", "name": "Tank Name *", "namePlaceholder": "Enter tank name", "desc": "Description", "descPlaceholder": "Optional description", "public": "Make public (others can view and add fish)", "submit": "Create Tank" },
+    "edit": { "title": "Edit Tank", "public": "Make this tank public", "update": "Update Tank" },
+    "share": { "title": "Share Tank", "desc": "Share this URL to let others view your tank:", "copy": "Copy URL" },
+    "add": { "title": "Add Fish to Tank", "loading": "Loading available fish...", "emptyTitle": "No fish available", "emptyDesc": "No fish are available to add to your tank right now.", "draw": "Draw Fish" }
+  },
+  "rank": {
+    "title": "Fish Ranking",
+    "sort": { "hot": "Sort by Hot", "score": "Sort by Score", "date": "Sort by Date", "random": "Random Order" },
+    "loading": "Loading fish..."
+  },
+  "profile": {
+    "title": "User Profile",
+    "loading": "Loading profile...",
+    "empty": { "title": "No user logged in", "desc": "Please log in to view your profile", "login": "Log In", "signup": "Sign Up" },
+    "stats": { "created": "Fish Created", "totalScore": "Total Score", "upvotes": "Total Upvotes", "downvotes": "Total Downvotes" },
+    "actions": { "edit": "Edit Profile", "viewFish": "View All Fish", "visitTank": "Visit Tank", "share": "Share Profile" }
+  }
+}
+
+

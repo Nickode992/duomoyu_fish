@@ -17,7 +17,7 @@
     <link rel="canonical" href="https://duomoyu.life/rank.html">
     
     <link rel="stylesheet" href="src/css/style.css">
-    <link rel="icon" href="public/favicon.ico">
+    <link rel="icon" href="favicon.ico">
     
     
     
@@ -275,27 +275,27 @@
 </head>
 <body>
     <div class="nav-links">
-        <a href="index.html">draw</a>
-        <a href="tank.html">tank</a>
-        <a href="rank.html">rankings</a>
-        <a href="profile.html">profile</a>
-        <a href="fishtanks.html" id="my-tanks-link">my tanks</a>
-        <a href="login.html" id="auth-link">login</a>
+        <a href="index.html" data-i18n="nav.draw">draw</a>
+        <a href="tank.html" data-i18n="nav.tank">tank</a>
+        <a href="rank.html" data-i18n="nav.rankings">rankings</a>
+        <a href="profile.html" data-i18n="nav.profile">profile</a>
+        <a href="fishtanks.html" id="my-tanks-link" data-i18n="nav.myTanks">my tanks</a>
+        <a href="login.html" id="auth-link" data-i18n="nav.login">login</a>
     </div>
     
     <div class="ranking-container">
         <div class="ranking-header">
-            <h1> Fish Ranking </h1>
+            <h1 data-i18n="rank.title"> Fish Ranking </h1>
         </div>
         
         <div class="sort-controls">
-            <button class="sort-btn active" data-sort="hot">Sort by Hot</button>
-            <button class="sort-btn" data-sort="score">Sort by Score</button>
-            <button class="sort-btn" data-sort="date">Sort by Date</button>
-            <button class="sort-btn" data-sort="random">Random Order</button>
+            <button class="sort-btn active" data-sort="hot" data-i18n="rank.sort.hot">Sort by Hot</button>
+            <button class="sort-btn" data-sort="score" data-i18n="rank.sort.score">Sort by Score</button>
+            <button class="sort-btn" data-sort="date" data-i18n="rank.sort.date">Sort by Date</button>
+            <button class="sort-btn" data-sort="random" data-i18n="rank.sort.random">Random Order</button>
         </div>
         
-        <div id="loading" class="loading">
+        <div id="loading" class="loading" data-i18n="rank.loading">
             Loading fish... 
         </div>
         
@@ -307,6 +307,7 @@
     <!-- Modals are now handled by modal-utils.js -->
     
     
+    <script src="src/js/i18n.js"></script>
     <script src="src/js/footer-utils.js"></script>
     <!-- Firebase disabled
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>

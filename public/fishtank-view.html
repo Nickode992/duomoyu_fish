@@ -5,17 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fish Tank View</title>
     <link rel="stylesheet" href="src/css/style.css">
-    <link rel="icon" href="public/favicon.ico">
+    <link rel="icon" href="favicon.ico">
     
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GS1GYSFBPX"></script>
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-GS1GYSFBPX"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
 
       gtag('config', 'G-GS1GYSFBPX');
-    </script>
+    </script> -->
     
     <style>
         /* Modal styling - matching rank page design */
@@ -94,7 +94,7 @@
     </style>
 </head>
 <body>
-    <div id="loading" style="text-align: center; padding: 20px; display: block;">Loading tank...</div>
+    <div id="loading" style="text-align: center; padding: 20px; display: block;" data-i18n="fishtankView.loading">Loading tank...</div>
     <div id="error" style="text-align: center; padding: 20px; color: red; display: none;"></div>
 
     <div id="tank-content" style="display: none;">
@@ -115,20 +115,20 @@
 
         <!-- Tank Stats -->
         <div style="text-align: center; margin-bottom: 15px; font-size: 12px; color: #666;">
-            Fish: <span id="fish-count" style="font-weight: bold;">0</span>
-            | Views: <span id="view-count" style="font-weight: bold;">0</span>
-            | Created: <span id="created-date" style="font-weight: bold;">--</span>
-            | Privacy: <span id="privacy-status" style="font-weight: bold;">--</span>
+            <span data-i18n="fishtankView.stats.fish">Fish:</span> <span id="fish-count" style="font-weight: bold;">0</span>
+            | <span data-i18n="fishtankView.stats.views">Views:</span> <span id="view-count" style="font-weight: bold;">0</span>
+            | <span data-i18n="fishtankView.stats.created">Created:</span> <span id="created-date" style="font-weight: bold;">--</span>
+            | <span data-i18n="fishtankView.stats.privacy">Privacy:</span> <span id="privacy-status" style="font-weight: bold;">--</span>
         </div>
 
         <!-- Fish List (Simple Grid) -->
         <div id="fish-section" style="margin-top: 30px;">
-            <h3 style="text-align: center; color: #666; font-size: 16px;">Fish in this tank</h3>
-            <div id="fish-loading" style="text-align: center; color: #999; display: none;">Loading fish...</div>
+            <h3 style="text-align: center; color: #666; font-size: 16px;" data-i18n="fishtankView.fishSection.title">Fish in this tank</h3>
+            <div id="fish-loading" style="text-align: center; color: #999; display: none;" data-i18n="fishtankView.fishSection.loading">Loading fish...</div>
             <div id="fish-error" style="text-align: center; color: red; display: none;"></div>
             <div id="fish-grid" style="display: flex; flex-wrap: wrap; justify-content: center; gap: 10px; margin: 20px 0;"></div>
             <div id="fish-empty" style="text-align: center; color: #999; padding: 30px; display: none;">
-                <p>This tank is empty. Add some fish to bring it to life!</p>
+                <p data-i18n="fishtankView.fishSection.empty">This tank is empty. Add some fish to bring it to life!</p>
             </div>
         </div>
     </div>
@@ -137,18 +137,19 @@
     <div id="add-fish-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="closeModal('add-fish-modal')">&times;</span>
-            <h2>Add Fish to Tank</h2>
+            <h2 data-i18n="fishtankView.addFish.title">Add Fish to Tank</h2>
             <div id="add-fish-error" class="error" style="display: none;"></div>
             <div id="add-fish-success" class="success" style="display: none;"></div>
-            <div id="user-fish-loading" style="text-align: center; color: #999; display: none;">Loading available fish...</div>
+            <div id="user-fish-loading" style="text-align: center; color: #999; display: none;" data-i18n="fishtankView.addFish.loading">Loading available fish...</div>
             <div id="user-fish-selection" style="display: flex; flex-wrap: wrap; gap: 10px; margin: 20px 0;"></div>
             <div id="user-fish-empty" style="text-align: center; color: #999; padding: 30px; display: none;">
-                <p>No fish are available to add to your tank right now.</p>
-                <a href="index.html" class="btn btn-primary">Draw Fish</a>
+                <p data-i18n="fishtankView.addFish.empty">No fish are available to add to your tank right now.</p>
+                <a href="index.html" class="btn btn-primary" data-i18n="fishtankView.addFish.draw">Draw Fish</a>
             </div>
         </div>
     </div>
 
+    <script src="src/js/i18n.js"></script>
     <script src="src/js/footer-utils.js"></script>
     <!-- Firebase disabled
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
